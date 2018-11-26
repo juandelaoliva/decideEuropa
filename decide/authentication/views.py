@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.views.generic.edit import FormView
 from authentication.forms import UserDecideForm
-from authentication.models import UserDecide, LoginEmailPetition
+from authentication.models import UserDecide
 from django.db import transaction
 from django.http import HttpResponse
 from django.views import View
@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 import _random as random
 import _string as string
 
-from .serializers import UserSerializer, TokenSerializer
+from .serializers import UserSerializer
 
 class GetUserView(APIView):
     def post(self, request):
