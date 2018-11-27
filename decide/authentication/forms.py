@@ -6,8 +6,8 @@ class UserDecideForm(forms.Form):
     last_name = forms.CharField(max_length=30)
     email = forms.EmailField()
     username = forms.CharField(max_length=150)
-    password1 = forms.CharField(min_length=8, max_length=150)
-    password2 = forms.CharField(min_length=8, max_length=150)
+    password1 = forms.CharField(min_length=8, max_length=150, widget=forms.PasswordInput)
+    password2 = forms.CharField(min_length=8, max_length=150, widget=forms.PasswordInput)
 
     def clean(self):
         cleaned_data = super().clean()
