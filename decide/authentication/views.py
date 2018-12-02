@@ -44,13 +44,6 @@ class RegisterUserView(FormView):
             last_name = last_name
         )
         user.save()
-        userDecide = UserDecide(
-            first_name = first_name,
-            last_name = last_name,
-            email = email,
-            user = user
-        )
-        userDecide.save()
         return HttpResponse()
 
 class LogoutView(APIView):
