@@ -9,6 +9,6 @@ class UserDecide(models.Model):
     email = models.EmailField()
     user = models.OneToOneField(User, on_delete = models.CASCADE)
 
-class TwoStepsAuthModel(models.Model):
+class TwoStepsAuth(models.Model):
     code = models.CharField(max_length = 192, unique = True)
     user = models.OneToOneField(User, on_delete = models.CASCADE, unique = True)
