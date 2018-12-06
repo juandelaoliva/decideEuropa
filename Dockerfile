@@ -10,8 +10,7 @@ RUN pip install ipython
 
 WORKDIR /app
 
-RUN git clone https://github.com/Serferjim/decide-Europa-Autentication.git .
-
+ADD ./ /app
 RUN pip install -r requirements.txt
 
 WORKDIR /app/decide
