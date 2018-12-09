@@ -94,3 +94,20 @@ Lanzar tests:
 Lanzar una consola SQL:
 
     $ docker exec -ti decide_db ash -c "su - postgres -c 'psql postgres'"
+
+Si no es la primera vez que se realiza el despliegue, realice un: 
+
+    $ docker-compose down
+    $ docker system prune -af
+    
+ATENCIÓN
+Si tiene más imágenes en docker a parte del proyecto decide sobre el que esté trabajando, siga las instrucciones
+de la documentación oficial de docker para eliminar las imágenes del proyecto decide, ya que el prune -af elimina todas las imágenes no usadas en ese momento.
+    
+Compruebe que no existen imágenes en docker con:
+
+    $ docker images
+    
+Y vuelva a desplegar el docker compose normalmente como se explicó anteriormente.
+
+Para el despliegue del proyecto local, realice lo mismo que en los pasos anteriores pero en la raíz del proyecto.
