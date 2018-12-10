@@ -9,6 +9,7 @@ from django.views.generic.edit import FormView
 from authentication.forms import UserDecideForm
 from django.db import transaction
 from django.http import HttpResponse
+from django import forms
 from django.views import View
 from django.core.mail import send_mail
 import _random as random
@@ -35,6 +36,26 @@ class RegisterUserView(FormView):
         email = form.cleaned_data['email']
         first_name = form.cleaned_data['first_name']
         last_name = form.cleaned_data['last_name']
+        if not username:
+            raise forms.ValidationError("The username is blank",
+                                        code='username_blank'
+            )
+        if not password:
+            raise forms.ValidationError("The password is blank",
+                                        code='password_blank'
+                                        )
+        if not first_name:
+            raise forms.ValidationError("The first name is blank",
+                                        code='first_name_blank'
+                                        )
+        if not last_name:
+            raise forms.ValidationError("The last name is blank",
+                                        code='last_name_blank'
+                                        )
+        if not email:
+            raise forms.ValidationError("The email is blank",
+                                        code='email_blank'
+                                        )
         user = User(
             username = username,
             password = password,
