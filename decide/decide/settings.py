@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'axes',
     'corsheaders',
     'django_filters',
     'rest_framework',
@@ -54,8 +53,6 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'base.backends.AuthBackend',
-    'axes.backends.AxesModelBackend'
-
 ]
 
 MODULES = [
@@ -89,12 +86,9 @@ AUTH_TEMPLATE_PATH = os.path.join(BASE_DIR, 'authentication')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
         'DIRS': [
 		AUTH_TEMPLATE_PATH
 	],
-
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
 
         'APP_DIRS': True,
         'OPTIONS': {
@@ -107,22 +101,6 @@ TEMPLATES = [
         },
     },
 ]
-
-
-
-#   new lock out fail attends
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    },
-    'axes_cache': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
-}
-
-AXES_CACHE = 'axes_cache'
-AXES_CACHE_LIMIT = 4
-AXES_COOLOFF_TIME = 0.005
 
 
 WSGI_APPLICATION = 'decide.wsgi.application'
@@ -187,4 +165,3 @@ except ImportError:
 
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
-LOGIN_REDIRECT_URL = '/'
