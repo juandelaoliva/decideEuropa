@@ -1,0 +1,19 @@
+language: python 
+python: 
+- "3.6"
+addons:
+- postgresql: "10"
+- apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+env: 
+- DJANGO=2.0 DB=postgres
+before_install: 
+- cd decide
+install: 
+- pip install -r ../requirements.txt
+before_script:
+- cp local_settings.travis.py local_settings.py
+script: 
+- python3 manage.py test postproc
