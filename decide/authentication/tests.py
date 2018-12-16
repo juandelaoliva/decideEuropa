@@ -95,7 +95,7 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         user = response.json()
-        self.assertEqual(user['id'], 1)
+        self.assertEqual(user['id'], 8)
         self.assertEqual(user['username'], 'voter1')
     def test_register_user_error(self):
         data = {'first_name': 'voter1', 'last_name': 'voter12', 'email': '',
@@ -105,12 +105,5 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code,200)
         loginData ={'voter1', '123'}
         response = self.client.post('/authentication/login/', loginData, format='json')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 400)
         token = response.json()
-
-        response = self.client.post('/authentication/getuser/', token, format='json')
-        self.assertEqual(response.status_code, 200)
-
-        user = response.json()
-        self.assertEqual(user['id'], 1)
-        self.assertEqual(user['username'], 'voter1')
