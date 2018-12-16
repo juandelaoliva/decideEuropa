@@ -86,3 +86,9 @@ class AuthTestCase(APITestCase):
                 }
         response = self.client.post('/authentication/register/', data, format='json')
         self.assertEqual(response.status_code,200)
+    def test_register_user_error(self):
+        data = {'first_name': 'voter1', 'last_name': 'voter12', 'email': '',
+                'username': 'voter1', 'password1': '123', 'password2': '123'
+                }
+        response = self.client.post('/authentication/register/', data, format='json')
+        self.assertEqual(response.status_code,401)
