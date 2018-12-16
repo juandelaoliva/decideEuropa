@@ -64,7 +64,7 @@ class RegisterUserView(FormView):
             last_name = last_name
         )
         user.save()
-        return HttpResponse()
+        return Response({})
 
 class LogoutView(APIView):
     def post(self, request):
