@@ -55,7 +55,7 @@ class RequestAuthEmailCodeView(FormView):
     @transaction.atomic
     def form_valid(self, form):
         email = form.cleaned_data['email']
-        send_mail_2_steps_auth(User.objects.get(email = email))
+        send_mail_2_steps_auth(email)
         return HttpResponse()
 
 class LoginEmailCodeView(FormView):
@@ -67,7 +67,7 @@ class LoginEmailCodeView(FormView):
     def form_valid(self, form):
         email = form.cleaned_data['email']
         code = form.cleaned_data['code']
-        login_email_auth(User.objects.get(email = email))
+        login_email_auth(email)
         return HttpResponse()
 
 class LogoutView(APIView):

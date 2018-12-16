@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from authentication.models import TwoStepsAuth
 from authentication.services import check_if_user_exists
+from rest_framework.authtoken.models import Token
 
 class UserDecideForm(forms.Form):
     first_name = forms.CharField(max_length=30)
@@ -57,3 +58,11 @@ class LoginAuthEmailForm(forms.Form):
             raise forms.ValidationError(_("Your email login petition isn't registered in the system"),
                 code = 'not_existent_two_steps_auth'
             )
+        try:
+            user = User.objects.get(email = email)
+            token = Token.objects.get(user = user)
+            raise forms.ValidationError(_("El usuario ya está autenticado en el sistema"),
+            code = 'token_already_created',
+            params = {},)
+        except ObjectDoesNotExist:
+            pass

@@ -6,6 +6,7 @@ from authentication.models import TwoStepsAuth
 from django.core.exceptions import ObjectDoesNotExist
 from Crypto import Random
 from rest_framework.authtoken.models import Token
+from django.forms import ValidationError
 
 def send_mail_2_steps_auth(email):
     u = check_if_user_exists_email(email)
@@ -16,7 +17,7 @@ def send_mail_2_steps_auth(email):
         two_steps_auth = TwoStepsAuth.objects.create(code = code, user = u)
     except ObjectDoesNotExist:
         two_steps_auth = TwoStepsAuth.objects.create(code = code, user = u)
-    send_mail('Autenticación en Decide mediante email', ''.join(('Use el siguiente código para autenticarse en el sistema\r\n\r\n', str(code))), 'decide@decide.com', [user.email], fail_silently = False)
+    send_mail('Autenticación en Decide mediante email', ''.join(('Use el siguiente código para autenticarse en el sistema\r\n\r\n', str(code))), 'decide@decide.com', [u.email], fail_silently = False)
 
 def login_email_auth(email):
     u = check_if_user_exists_email(email)
