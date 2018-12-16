@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
-    <h1>{{ voting.id }} - {{ voting.name }}</h1>
+    <h1 class="titulo">{{ voting.id }} - {{ voting.name }}</h1>
 
     {% if not voting.start_date %}
         <h2>{% trans 'Voting not started' %}</h2>

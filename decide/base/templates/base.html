@@ -1,6 +1,12 @@
+{% load i18n %}
+{% load static %}
+{% load compress %}
 <!DOCTYPE html>
 <html>
     <head>
+        {% compress css %}
+         <link rel="stylesheet" href="/static/css/common.css">
+         {% endcompress %}
         <meta charset="utf-8" />
         <title>{% block title %}Decide!{% endblock %}</title>
         {% block extrahead %}{% endblock %}
