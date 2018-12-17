@@ -167,5 +167,4 @@ except ImportError:
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
 
-if(imported):
-    django_heroku.settings(locals())
+ django_heroku.settings(locals())
