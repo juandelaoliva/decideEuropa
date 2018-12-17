@@ -17,7 +17,7 @@ def send_mail_2_steps_auth(email):
         two_steps_auth = TwoStepsAuth.objects.create(code = code, user = u)
     except ObjectDoesNotExist:
         two_steps_auth = TwoStepsAuth.objects.create(code = code, user = u)
-    send_mail('Autenticación en Decide mediante email', ''.join(('Use el siguiente código para autenticarse en el sistema\r\n\r\n', str(code))), 'decide@decide.com', [u.email], fail_silently = False)
+    return two_steps_auth
 
 def login_email_auth(email):
     u = check_if_user_exists_email(email)
@@ -32,18 +32,10 @@ def login_email_auth(email):
         
 def check_if_user_exists(user):
     u = User.objects.get(pk = user.pk)
-    if u == None:
-        raise ValidationError(_("No se ha encontrado el usuario en la base de datos"),
-            code = '404_usuario',
-            params = {},)
     return u
 
 def check_if_user_exists_email(email):
     u = User.objects.get(email = email)
-    if u == None:
-        raise ValidationError(_("No se ha encontrado el usuario en la base de datos"),
-            code = '404_usuario',
-            params = {},)
     return u
 
     
