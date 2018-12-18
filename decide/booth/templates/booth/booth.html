@@ -32,13 +32,58 @@
         <a href="#" onClick="decideLogout()">{% trans "logout" %}</a>
         <h2>{{ voting.question.desc }}</h2>
 
-        {% for opt in voting.question.options %}
+        {% if voting.question.options|length == 2 %}{% for opt in voting.question.options %}
+
+            <style>
+
+                .button {
+                    float:left;
+                    padding: 15px 30px;
+                    text-align: center;
+                    font-size: 16px;
+                    transition-duration: 0.05s;
+                    border-radius: 4px 4px 4px 4px;
+                    color: black; 
+                    background-color: white;
+                }
+
+                .buttonyes { border: 2px solid green; }
+
+                .buttonyes:hover { background-color: green; color: white; }
+
+                .buttonno { margin-left: 50px; border: 2px solid red; }
+
+                .buttonno:hover { background-color: red; color: white; }
+                
+            </style>
+        
+            {% if opt.option == 'Si' or opt.option == 'Sí' or opt.option == 'Yes'%}
+                <label for="q{{opt.number}}">
+                    <input class="button buttonyes" id="q{{opt.number}}" type="submit" name="question" value={{opt.option}} onClick="decideEncryptYesNo(this)"/>
+                </label>
+            {% endif %}
+            {% if opt.option == 'No'%}
+                <label for="q{{opt.number}}">
+                    <input class="button buttonno" id="q{{opt.number}}" type="submit" name="question" value={{opt.option}} onClick="decideEncryptYesNo(this)"/>
+                </label><br/>
+            {% endif %}
+            {% if opt.option != 'Si' and opt.option != 'Sí' and opt.option != 'Yes' and opt.option != 'No'%}
+                <label for="q{{opt.number}}">
+                    <input id="q{{opt.number}}" type="radio" name="question" value={{opt.number}} />{{opt.option}}<br/>
+                </label>
+            {% endif %}
+        {% endfor %}{% endif %}
+
+        {% if voting.question.options|length != 2 %}{% for opt in voting.question.options %}
+
             <label for="q{{opt.number}}">
-                <input id="q{{opt.number}}" type="radio" name="question" value={{opt.number}} /> {{opt.option}}<br/>
+                <input id="q{{opt.number}}" type="radio" name="question" value={{opt.number}} />{{opt.option}}<br/>
             </label>
         {% endfor %}
+            <input type="submit" value="{% trans "Vote" %}" onClick="decideSend()"/>
 
-        <input type="submit" value="{% trans "Vote" %}" onClick="decideSend()"/>
+        {% endif %}
+
     </div>
 {% endblock %}
 
@@ -108,6 +153,27 @@
               .then(data => {
                 alert("{% trans "Conglatulations. Your vote has been sent" %}")
                 console.log(v);
+              })
+              .catch(error => {
+                alert("{% trans "Error: " %}" + error);
+                console.error(error);
+              });
+        }
+
+        function decideEncryptYesNo(res) {
+            var msg = res.value;
+            var bigmsg = BigInt.fromJSONObject(msg);
+            var cipher = ElGamal.encrypt(bigpk, bigmsg);
+            var data = {
+                vote: {a: cipher.alpha.toString(), b: cipher.beta.toString()},
+                voting: {{voting.id}},
+                voter: user.id,
+                token: token
+            }
+            postData("{{store_url}}" + "/store/", data)
+              .then(data => {
+                alert("{% trans "Conglatulations. Your vote has been sent" %}")
+                console.log(cipher);
               })
               .catch(error => {
                 alert("{% trans "Error: " %}" + error);
