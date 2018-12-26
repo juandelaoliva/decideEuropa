@@ -23,9 +23,6 @@ def login_email_auth(email):
     u = check_if_user_exists_email(email)
     try:
         token = Token.objects.get(user = u)
-        raise ValidationError(_("El usuario ya está autenticado en el sistema"),
-            code = 'token_already_created',
-            params = {},)
     except ObjectDoesNotExist:
         TwoStepsAuth.objects.get(user = u).delete()
         token = Token.objects.create(user = u)
