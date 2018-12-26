@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 from authentication.services import send_mail_2_steps_auth, login_email_auth
 from authentication.models import TwoStepsAuth
 
-from django.forms import ValidationError
+from authentication.exceptions import IllegalArgumentException
 from django.core.exceptions import ObjectDoesNotExist
 
 class LoginEmailTestCase(TestCase):
@@ -31,6 +31,15 @@ class LoginEmailTestCase(TestCase):
         try:
             two_steps_auth = send_mail_2_steps_auth(email)
         except ObjectDoesNotExist:
+            res = True
+        self.assertEqual(res, True)
+
+    def test_send_mail_2_steps_auth_user_already_authenticated(self):
+        res = False
+        email = 'user1@test.com'
+        try:
+            two_steps_auth = send_mail_2_steps_auth(email)
+        except IllegalArgumentException:
             res = True
         self.assertEqual(res, True)
 
@@ -74,6 +83,6 @@ class LoginEmailTestCase(TestCase):
         email = 'user1@test.com'
         try:
             login_email_auth(email)
-        except ValidationError:
+        except IllegalArgumentException:
             res = True
         self.assertEqual(res, True)

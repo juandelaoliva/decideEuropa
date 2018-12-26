@@ -6,10 +6,15 @@ from authentication.models import TwoStepsAuth
 from django.core.exceptions import ObjectDoesNotExist
 from Crypto import Random
 from rest_framework.authtoken.models import Token
-from django.forms import ValidationError
+from authentication.exceptions import IllegalArgumentException
 
 def send_mail_2_steps_auth(email):
     u = check_if_user_exists_email(email)
+    try:
+        token = Token.objects.get(user = u)
+        raise IllegalArgumentException(_("The user is already logged"),)
+    except ObjectDoesNotExist:
+        pass
     code = str(int.from_bytes(Random.new().read(24), 'big'))
     try:	
         old_two_steps_auth = TwoStepsAuth.objects.get(user = u)
@@ -23,9 +28,7 @@ def login_email_auth(email):
     u = check_if_user_exists_email(email)
     try:
         token = Token.objects.get(user = u)
-        raise ValidationError(_("El usuario ya está autenticado en el sistema"),
-            code = 'token_already_created',
-            params = {},)
+        raise IllegalArgumentException(_("El usuario ya está autenticado en el sistema"),)
     except ObjectDoesNotExist:
         TwoStepsAuth.objects.get(user = u).delete()
         token = Token.objects.create(user = u)

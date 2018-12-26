@@ -35,8 +35,13 @@ class RequestAuthEmailForm(forms.Form):
             user = User.objects.get(email = email)
         except ObjectDoesNotExist:
             raise forms.ValidationError(_("This email doesn't exist"),
-                code = 'not_existent_email'
-            )
+                code = 'not_existent_email')
+        try:
+            token = Token.objects.get(user = user)
+            raise forms.ValidationError(_("The user is already logged"),
+                code = 'user_already_logged')
+        except ObjectDoesNotExist:
+            pass
 
 class LoginAuthEmailForm(forms.Form):
     email = forms.EmailField()
