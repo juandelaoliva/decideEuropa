@@ -25,6 +25,7 @@ class LoginEmailTestCase(TestCase):
         self.assertEqual(two_steps_auth.user, user)
         self.assertEqual(db_two_steps_auth, two_steps_auth)
 
+    # Se pide un código usando un email no registrado en el sistema
     def test_send_mail_2_steps_auth_email_without_user(self):
         res = False
         email = 'email@sin.usuario'
@@ -34,6 +35,7 @@ class LoginEmailTestCase(TestCase):
             res = True
         self.assertEqual(res, True)
 
+    # Se pide un código estando el ususario ya autenticado
     def test_send_mail_2_steps_auth_user_already_authenticated(self):
         res = False
         email = 'user1@test.com'
@@ -60,6 +62,7 @@ class LoginEmailTestCase(TestCase):
         self.assertEqual(is_created_db_token, True)
         self.assertEqual(no_two_steps_auth, True)
 
+    # Se hace login usando un email no registrado en el sistema
     def test_login_email_auth_email_without_user(self):
         res = False
         email = 'email@without.user'
@@ -68,7 +71,8 @@ class LoginEmailTestCase(TestCase):
         except ObjectDoesNotExist:
             res = True
         self.assertEqual(res, True)
-            
+    
+    # Un usuario que no ha pedido código intenta hacer login
     def test_login_email_auth_user_without_petition(self):
         res = False
         email = 'user@test.com'
@@ -78,6 +82,7 @@ class LoginEmailTestCase(TestCase):
             res = True
         self.assertEqual(res, True)
 
+    # Un usuario que ya está autenticado intenta hacer login
     def test_login_email_auth_user_already_authenticated(self):
         res = False
         email = 'user1@test.com'
