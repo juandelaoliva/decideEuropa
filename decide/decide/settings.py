@@ -95,7 +95,6 @@ TEMPLATES = [
 	],
 
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,6 +108,7 @@ TEMPLATES = [
 ]
 
 
+<<<<<<< HEAD
 
 #   new lock out fail attends
 CACHES = {
@@ -123,7 +123,6 @@ CACHES = {
 AXES_CACHE = 'axes_cache'
 AXES_CACHE_LIMIT = 4
 AXES_COOLOFF_TIME = 0.005
-
 
 WSGI_APPLICATION = 'decide.wsgi.application'
 

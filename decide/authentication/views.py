@@ -55,7 +55,9 @@ class RequestAuthEmailCodeView(FormView):
     @transaction.atomic
     def form_valid(self, form):
         email = form.cleaned_data['email']
-        send_mail_2_steps_auth(email)
+        two_steps_auth = send_mail_2_steps_auth(email)
+        send_mail('Autenticación en Decide mediante email', ''.join(('Use el siguiente código para autenticarse en el sistema\r\n\r\n', 
+str(two_steps_auth.code))), 'decide@decide.com', [two_steps_auth.user.email], fail_silently = False)
         return HttpResponse()
 
 class LoginEmailCodeView(FormView):
