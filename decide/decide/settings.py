@@ -108,8 +108,6 @@ TEMPLATES = [
 ]
 
 
-<<<<<<< HEAD
-
 #   new lock out fail attends
 CACHES = {
     'default': {
