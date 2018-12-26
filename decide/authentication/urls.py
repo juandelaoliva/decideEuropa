@@ -11,4 +11,5 @@ urlpatterns = [
     path('register/', RegisterUserView.as_view()),
     path('request-auth-email-code/', RequestAuthEmailCodeView.as_view()),
     path('login-auth-email/', LoginEmailCodeView.as_view()),
+    path('prueba/', RegisterUserView.as_view()),
 ]
