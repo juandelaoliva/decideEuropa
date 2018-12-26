@@ -103,3 +103,7 @@ ENV/
 .vscode/settings.json
 decide/db.sqlite3
 decide-env/bin/easy_install
+
+# Rama pablo
+.idea/
+decide/authentication/migrations
