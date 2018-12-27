@@ -43,7 +43,9 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         user = response.json()
-        self.assertEqual(user['id'], 1)
+
+        exists_user = user['id'] > 0 and user != None
+        self.assertEqual(exists_user, True)
         self.assertEqual(user['username'], 'voter1')
 
     def test_getuser_invented_token(self):

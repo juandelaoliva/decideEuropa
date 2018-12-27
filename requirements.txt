@@ -9,3 +9,4 @@ django-rest-swagger==2.2.0
 gunicorn
 django-axes==4.4.3
 django-heroku
+
