@@ -98,7 +98,6 @@ class AuthTestCase(APITestCase):
 
         user = response.json()
         self.assertEqual(user['username'], 'voter1')
-        self.assertEqual(user['last_name'], 'voter12')
     def test_register_user_error(self):
         data = {'first_name': 'voter1', 'last_name': 'voter12', 'email': '',
                 'username': 'voter1', 'password1': '123', 'password2': '123'
