@@ -1,12 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.views.generic.edit import FormView
-from authentication.forms import UserDecideForm, RequestAuthEmailForm, LoginAuthEmailForm
+from authentication.forms import UserDecideForm, RequestLoginlForm, LoginAuthEmailForm
 from authentication.models import UserDecide, TwoStepsAuth
 from django.db import transaction
 from django.http import HttpResponse
@@ -68,18 +68,21 @@ class RegisterUserView(FormView):
         user.save()
         return HttpResponse()
 
-class RequestAuthEmailCodeView(FormView):
+class RequestLoginView(FormView):
     template_name = 'request_auth_email.html'
-    form_class = RequestAuthEmailForm
+    form_class = RequestLoginlForm
     success = 'localhost:8080'
 
     @transaction.atomic
     def form_valid(self, form):
-        email = form.cleaned_data['email']
-        two_steps_auth = send_mail_2_steps_auth(email)
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = User.objects.get(username=username, password=password)
+        two_steps_auth = send_mail_2_steps_auth(user.email)
         send_mail('Autenticación en Decide mediante email', ''.join(('Use el siguiente código para autenticarse en el sistema\r\n\r\n', 
 str(two_steps_auth.code))), 'decide@decide.com', [two_steps_auth.user.email], fail_silently = False)
-        return HttpResponse()
+
+        return redirect('login-auth-email/')
 
 class LoginEmailCodeView(FormView):
     template_name = 'login_auth_email.html'
@@ -90,6 +93,13 @@ class LoginEmailCodeView(FormView):
     def form_valid(self, form):
         email = form.cleaned_data['email']
         code = form.cleaned_data['code']
+        user = User.objects.get(email=email)
+        try:
+            two_steps_auth = TwoStepsAuth.objects.get(user = user, code = code)
+        except ObjectDoesNotExist:
+            raise forms.ValidationError(_("Your email login petition isn't registered in the system"),
+                code = 'not_existent_two_steps_auth'
+            )
         login_email_auth(email)
         return HttpResponse()
 

@@ -25,17 +25,19 @@ class UserDecideForm(forms.Form):
                 code = 'not_matching_passwords'
             )
 
-class RequestAuthEmailForm(forms.Form):
-    email = forms.EmailField()
+class RequestLoginlForm(forms.Form):
+    username = forms.TextInput()
+    password = forms.PasswordInput()
 
     def clean(self):
         cleaned_data = super().clean()
-        email = cleaned_data.get('email')
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
         try:
-            user = User.objects.get(email = email)
+            user = User.objects.get(username = username, password = password)
         except ObjectDoesNotExist:
-            raise forms.ValidationError(_("This email doesn't exist"),
-                code = 'not_existent_email')
+            raise forms.ValidationError(_("This user or password doesn't exist"),
+                code = 'not_existent_user')
         try:
             token = Token.objects.get(user = user)
             raise forms.ValidationError(_("The user is already logged"),

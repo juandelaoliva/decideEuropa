@@ -28,6 +28,7 @@ def login_email_auth(email):
     u = check_if_user_exists_email(email)
     try:
         token = Token.objects.get(user = u)
+        two_steps_auth = TwoStepsAuth.objects.get(user=user, code=code)
         raise IllegalArgumentException(_("El usuario ya está autenticado en el sistema"),)
     except ObjectDoesNotExist:
         TwoStepsAuth.objects.get(user = u).delete()
