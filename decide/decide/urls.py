@@ -23,6 +23,7 @@ schema_view = get_swagger_view(title='Decide API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')), # new
     path('doc/', schema_view)
 ]
 

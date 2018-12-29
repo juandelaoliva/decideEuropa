@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
+    'axes',
 ]
 
 REST_FRAMEWORK = {
@@ -53,6 +54,8 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'base.backends.AuthBackend',
+    'axes.backends.AxesModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MODULES = [
@@ -67,7 +70,7 @@ MODULES = [
     'voting',
 ]
 
-BASEURL = 'http://localhost:8000'
+BASEURL = 'https://decide-europa-authentication.herokuapp.com/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -86,10 +89,12 @@ AUTH_TEMPLATE_PATH = os.path.join(BASE_DIR, 'authentication')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': [
 		AUTH_TEMPLATE_PATH
 	],
 
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,6 +107,20 @@ TEMPLATES = [
     },
 ]
 
+
+#   new lock out fail attends
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'axes_cache': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+AXES_CACHE = 'axes_cache'
+AXES_CACHE_LIMIT = 4
+AXES_COOLOFF_TIME = 0.005
 
 WSGI_APPLICATION = 'decide.wsgi.application'
 
@@ -157,11 +176,14 @@ STATIC_URL = '/static/'
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
-
+APIS = {}
 try:
     from local_settings import *
 except ImportError:
     print("local_settings.py not found")
 
+import django_heroku
+django_heroku.settings(locals())
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
+LOGIN_REDIRECT_URL = '/'
