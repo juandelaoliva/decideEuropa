@@ -112,18 +112,18 @@ class AuthTestCase(APITestCase):
         token = response.json()
 
     def test_register_user_valid2(self):
-        data1 = {'first_name': 'voter3', 'last_name': 'voter12', 'email': 'email1@email.com',
+        data = {'first_name': 'voter3', 'last_name': 'voter12', 'email': 'email1@email.com',
                  'username': 'voter3', 'password1': '123', 'password2': '123'
                 }
-        response1 = self.client.post('/authentication/register/', data1, format='json')
-        self.assertEqual(response1.status_code,200)
-        loginData1 = {'username': 'voter3', 'password': '123'}
-        response2 = self.client.post('/authentication/login/', loginData1, format='json')
-        self.assertEqual(response2.status_code, 200)
-        token1 = response2.json()
+        response = self.client.post('/authentication/register/', data, format='json')
+        self.assertEqual(response.status_code,200)
+        loginData = {'username': 'voter3', 'password': '123'}
+        response = self.client.post('/authentication/login/', loginData, format='json')
+        self.assertEqual(response.status_code, 200)
+        token = response.json()
 
-        response3 = self.client.post('/authentication/getuser/', token1, format='json')
-        self.assertEqual(response3.status_code, 200)
+        response = self.client.post('/authentication/getuser/', token, format='json')
+        self.assertEqual(response.status_code, 200)
 
-        user1 = response3.json()
-        self.assertEqual(user1['username'], 'voter3')
+        user = response.json()
+        self.assertEqual(user['username'], 'voter3')
