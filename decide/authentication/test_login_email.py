@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from authentication.services import send_mail_2_steps_auth, login_email_auth
+from .services import send_mail_2_steps_auth, login_email_auth
 from authentication.models import TwoStepsAuth
 
 from authentication.exceptions import IllegalArgumentException
@@ -86,6 +86,26 @@ class LoginEmailTestCase(TestCase):
     def test_login_email_auth_user_already_authenticated(self):
         res = False
         email = 'user1@test.com'
+        try:
+            login_email_auth(email)
+        except IllegalArgumentException:
+            res = True
+        self.assertEqual(res, True)
+
+    # Usuario introduce email vacío
+    def test_send_empty_email(self):
+        res = False
+        email = ''
+        try:
+            login_email_auth(email)
+        except IllegalArgumentException:
+            res = True
+        self.assertEqual(res, True)
+
+    #Usuario introduce email no válido
+    def test_send_noValidEmail(self):
+        res = False
+        email = 'aaaa'
         try:
             login_email_auth(email)
         except IllegalArgumentException:
