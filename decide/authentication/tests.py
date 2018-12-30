@@ -126,5 +126,4 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         user2 = response.json()
-        self.assertEqual(user2['id'], 9)
         self.assertEqual(user2['username'], 'voter2')
