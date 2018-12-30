@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.views.generic.edit import FormView
 from authentication.forms import UserDecideForm
-from authentication.models import UserDecide
 from django.db import transaction
 from django.http import HttpResponse
 from django.views import View
@@ -44,13 +43,6 @@ class RegisterUserView(FormView):
             last_name = last_name
         )
         user.save()
-        userDecide = UserDecide(
-            first_name = first_name,
-            last_name = last_name,
-            email = email,
-            user = user
-        )
-        userDecide.save()
         return HttpResponse()
 
 class LogoutView(APIView):
