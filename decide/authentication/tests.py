@@ -112,8 +112,8 @@ class AuthTestCase(APITestCase):
         token = response.json()
 
     def test_register_user_valid2(self):
-        data = {'first_name': 'voter3', 'last_name': 'voter12', 'email': 'email1@email.com',
-                 'username': 'voter3', 'password1': '123', 'password2': '123'
+        data = {'first_name': 'voter3', 'last_name': 'voter12', 'email': 'email2@email.com',
+                'username': 'voter3', 'password1': '123', 'password2': '123'
                 }
         response = self.client.post('/authentication/register/', data, format='json')
         self.assertEqual(response.status_code,200)

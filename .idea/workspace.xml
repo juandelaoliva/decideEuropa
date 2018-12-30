@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a55de1c4-7314-4fe6-b4b8-9a686adb3691" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/decide/authentication/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/decide/authentication/tests.py" afterDir="false" />
-    </list>
+    <list default="true" id="a55de1c4-7314-4fe6-b4b8-9a686adb3691" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/decide/authentication/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="118" column="50" lean-forward="true" selection-start-line="118" selection-start-column="50" selection-end-line="118" selection-end-column="50" />
+            <state relative-caret-position="709">
+              <caret line="121" column="51" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="51" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -164,8 +162,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/decide/authentication/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="118" column="50" lean-forward="true" selection-start-line="118" selection-start-column="50" selection-end-line="118" selection-end-column="50" />
+        <state relative-caret-position="709">
+          <caret line="121" column="51" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="51" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
