@@ -7,3 +7,5 @@ django-filter==1.1.0
 psycopg2==2.7.4
 django-rest-swagger==2.2.0
 django-axes==4.4.3
+numpy==1.15.4
+simpy==3.0.11
