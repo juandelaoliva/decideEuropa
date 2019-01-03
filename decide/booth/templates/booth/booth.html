@@ -179,13 +179,21 @@
             }
             postData("{{store_url}}" + "/store/", data)
               .then(data => {
-                alert("{% trans "Conglatulations. Your vote has been sent" %}")
                 console.log(cipher);
+                alertLogOut()
               })
               .catch(error => {
                 alert("{% trans "Error: " %}" + error);
                 console.error(error);
               });
+        }
+        
+        function alertLogOut(){
+        	//Las siguientes dos líneas sirven para desloguearte
+            if(confirm("{% trans "Conglatulations. Your vote has been sent" %}. ¿Desea cerrar sesión?"))
+            {
+            decideLogout()
+            }
         }
 
         function decideLogout() {
