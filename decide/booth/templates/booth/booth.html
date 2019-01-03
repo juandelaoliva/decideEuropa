@@ -32,8 +32,6 @@
         <a href="#" onClick="decideLogout()">{% trans "logout" %}</a>
         <h2>{{ voting.question.desc }}</h2>
 
-        {% if voting.question.options|length == 2 %}{% for opt in voting.question.options %}
-
             <style>
 
                 .button {
@@ -54,33 +52,42 @@
                 .buttonno { margin-left: 50px; border: 2px solid red; }
 
                 .buttonno:hover { background-color: red; color: white; }
+
+                .buttonseveral { float:none; margin-left: 50px; border: 2px solid blue; }
+
+                .buttonseveral:hover { background-color: blue; color: white; }
                 
             </style>
         
+        {% comment %} Interfaz de votación Sí/No {% endcomment %}
+        {% if voting.question.options|length == 2 %}{% for opt in voting.question.options %}
+
+            <label for="q{{opt.number}}">
+
             {% if opt.option == 'Si' or opt.option == 'Sí' or opt.option == 'Yes'%}
-                <label for="q{{opt.number}}">
-                    <input class="button buttonyes" id="q{{opt.number}}" type="submit" name="question" value={{opt.option}} onClick="decideEncryptYesNo(this)"/>
-                </label>
+                <input class="button buttonyes" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
             {% endif %}
+
             {% if opt.option == 'No'%}
-                <label for="q{{opt.number}}">
-                    <input class="button buttonno" id="q{{opt.number}}" type="submit" name="question" value={{opt.option}} onClick="decideEncryptYesNo(this)"/>
-                </label><br/>
+                <input class="button buttonno" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
             {% endif %}
+
             {% if opt.option != 'Si' and opt.option != 'Sí' and opt.option != 'Yes' and opt.option != 'No'%}
-                <label for="q{{opt.number}}">
-                    <input id="q{{opt.number}}" type="radio" name="question" value={{opt.number}} />{{opt.option}}<br/>
-                </label>
+                <input id="q{{opt.number}}" type="radio" name="question" value="{{opt.number}}" />{{opt.option}}<br/>
             {% endif %}
+            </label>
+
         {% endfor %}{% endif %}
 
+        {% comment %} Interfaz de votación para varias respuestas {% endcomment %}
         {% if voting.question.options|length != 2 %}{% for opt in voting.question.options %}
 
             <label for="q{{opt.number}}">
-                <input id="q{{opt.number}}" type="radio" name="question" value={{opt.number}} />{{opt.option}}<br/>
+                <input class="button buttonseveral" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
             </label>
+            <br/><br/>
+
         {% endfor %}
-            <input type="submit" value="{% trans "Vote" %}" onClick="decideSend()"/>
 
         {% endif %}
 
@@ -141,7 +148,7 @@
             return cipher;
         }
 
-        function decideSend() {
+        {% comment %} function decideSend() {
             var v = decideEncrypt();
             var data = {
                 vote: {a: v.alpha.toString(), b: v.beta.toString()},
@@ -158,7 +165,7 @@
                 alert("{% trans "Error: " %}" + error);
                 console.error(error);
               });
-        }
+        } {% endcomment %}
 
         function decideEncryptYesNo(res) {
             var msg = res.value;
