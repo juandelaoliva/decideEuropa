@@ -42,14 +42,17 @@ class PostProcView(APIView):
         options.sort(key=lambda x: -x['seats'])
         return Response(options)
         
-    def equalityVoting(options, seats, method):
-        groups = {}
+    def equalityVoting(self, options, seats, method):
+        groups = []
         divOptions = {}
-        res = {}
+        res = []
         
         #Obtener grupos
         for opt in options:
-            groups.append()
+            g = opt.get("group", "no_group")
+            
+            if not g in groups: 
+                groups.append(g)
 
         #Inicializar listas de opciones
         for group in groups:
@@ -59,6 +62,11 @@ class PostProcView(APIView):
         for opt in options:
             divOptions[opt.get("group", "no_group")].append(opt)
 
+        #Unificar votaciones
+        for group in dict(divOptions):
+            res = [*res, *method(divOptions[group], seats//len(groups)).data]
+
+        res.sort(key=lambda x: -x['seats'])
         return Response(res)
 
     def post(self, request):
@@ -76,17 +84,28 @@ class PostProcView(APIView):
         """
 
         t = request.data.get('type', 'IDENTITY')
+        groups = request.data.get('groups', False)
         opts = request.data.get('options', [])
 
-        if t == 'IDENTITY':
-            return self.identity(opts)
+        if groups:
+            if t == 'DHONDT':
+                seats = int(float(request.data.get('seats', '8')))
+                return self.equalityVoting(opts, seats, lambda x, y : self.dhondt(x, y))
 
-        elif t == 'DHONDT':
-            seats = int(float(request.data.get('seats', '8')))
-            return self.dhondt(opts,seats)
+            elif t == 'SAINTELAGUE':
+                seats = int(float(request.data.get('seats', '8')))
+                return self.equalityVoting(opts, seats, lambda x, y : self.sainteLague(x, y))
 
-        elif t == 'SAINTELAGUE':
-            seats = int(float(request.data.get('seats', '8')))
-            return self.sainteLague(opts, seats)            
+        else:
+            if t == 'IDENTITY':
+                return self.identity(opts)
+
+            elif t == 'DHONDT':
+                seats = int(float(request.data.get('seats', '8')))
+                return self.dhondt(opts,seats)
+
+            elif t == 'SAINTELAGUE':
+                seats = int(float(request.data.get('seats', '8')))
+                return self.sainteLague(opts, seats)            
 
         return Response({})
