@@ -125,8 +125,9 @@ AXES_CACHE = 'axes_cache'
 AXES_CACHE_LIMIT = 4
 AXES_COOLOFF_TIME = 0.005
 
-WSGI_APPLICATION = 'decide.wsgi.application'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+WSGI_APPLICATION = 'decide.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
