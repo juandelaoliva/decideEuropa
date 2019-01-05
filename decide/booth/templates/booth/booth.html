@@ -3,6 +3,9 @@
 
 {% block content %}
     <h1>{{ voting.id }} - {{ voting.name }}</h1>
+    <div id="styleDiv">
+        <p> {{ voting.desc }} </p>            	 
+    </div>
 
     <div id="login">
         <label for="username">{% trans "Username" %}</label>
@@ -13,7 +16,8 @@
         <br/>
         <input type="submit" value="{% trans "Login" %}" onClick="decideLogin()"/>
     </div>
-
+	
+	
     <div id="voting">
     
     	{% if start_date == None%}
@@ -30,6 +34,7 @@
         	 
         {% endif %}
         <a href="#" onClick="decideLogout()">{% trans "logout" %}</a>
+         
         <h2>{{ voting.question.desc }}</h2>
 
             <style>
@@ -57,7 +62,23 @@
 
                 .buttonseveral:hover { background-color: blue; color: white; }
                 
+                
+                #styleDiv{
+	                border-style:solid;
+	                border-wodth: 2px;
+	                border-height:10px;
+	                border-color: black;
+	                border-radius: 2px 2px 2px 2px;
+    				-moz-border-radius: 2px 2px 2px 2px;
+    				-webkit-border-radius: 2px 2px 2px 2px;
+    				border: 1px solid #000000;
+    				padding:5px;
+    				background-color: #ADD8E6;
+	                
+                }
             </style>
+            
+           
         
         {% comment %} Interfaz de votación Sí/No {% endcomment %}
         {% if voting.question.options|length == 2 %}{% for opt in voting.question.options %}
