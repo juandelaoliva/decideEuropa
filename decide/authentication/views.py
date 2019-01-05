@@ -38,7 +38,7 @@ class RegisterUserView(FormView):
         email = form.cleaned_data['email']
         first_name = form.cleaned_data['first_name']
         last_name = form.cleaned_data['last_name']
-           if not username:
+        if not username:
             raise forms.ValidationError("The username is blank",
                                         code='username_blank'
             )
