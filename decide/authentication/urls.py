@@ -6,8 +6,8 @@ from authentication.views import GetUserView, LogoutView, RegisterUserView, Requ
 
 urlpatterns = [
     path('login/', obtain_auth_token),
-    path('logout-api/', LogoutView.as_view()),
-    path('logout/', LogoutSessionView.as_view()),
+    path('logout/', LogoutView.as_view()),
+    path('logout-session/', LogoutSessionView.as_view()),
     path('getuser/', GetUserView.as_view()),
     path('register/', RegisterUserView.as_view()),
     path('activate-account/', ActivateAccountView.as_view()),
