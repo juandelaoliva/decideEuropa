@@ -47,9 +47,10 @@ def activate_account_recently_registered(username, password, code):
     user_status.save()
     
 def register_user(username, password, email, first_name, last_name):
+    hashed_password = make_password(password)
     user = User.objects.create(
         username = username,
-        password = password,
+        password = hashed_password,
         email = email,
         first_name = first_name,
         last_name = last_name
