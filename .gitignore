@@ -99,6 +99,9 @@ ENV/
 /site
 
 # mypy
+
+#Pycharm files
+.idea/
 .mypy_cache/
 .vscode/settings.json
 decide/db.sqlite3
