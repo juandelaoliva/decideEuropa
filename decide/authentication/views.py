@@ -38,6 +38,26 @@ class RegisterUserView(FormView):
         email = form.cleaned_data['email']
         first_name = form.cleaned_data['first_name']
         last_name = form.cleaned_data['last_name']
+        if not username:
+            raise forms.ValidationError("The username is blank",
+                                        code='username_blank'
+            )
+        if not password:
+            raise forms.ValidationError("The password is blank",
+                                        code='password_blank'
+                                        )
+        if not first_name:
+            raise forms.ValidationError("The first name is blank",
+                                        code='first_name_blank'
+                                        )
+        if not last_name:
+            raise forms.ValidationError("The last name is blank",
+                                        code='last_name_blank'
+                                        )
+        if not email:
+            raise forms.ValidationError("The email is blank",
+                                        code='email_blank'
+                                        )
         two_steps_auth = register_user(username, password, email, first_name, last_name)
         send_mail('Bienvenido a Decide', 
             ''.join(('Use el siguiente código para verificar tu identidad y confirmar tu registro en la aplicación\r\n\r\n', 
@@ -55,6 +75,7 @@ class ActivateAccountView(FormView):
         code = form.cleaned_data['code']
         activate_account_recently_registered(username, password, code)
         return HttpResponseRedirect('/')
+
 
 class RequestAuthEmailCodeView(FormView):
     template_name = 'request_auth_email.html'
