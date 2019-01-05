@@ -34,7 +34,7 @@ class RegisterUserView(FormView):
     @transaction.atomic
     def form_valid(self, form):
         username = form.cleaned_data['username']
-        password = make_password(form.cleaned_data['password1'])
+        password = form.cleaned_data['password1']
         email = form.cleaned_data['email']
         first_name = form.cleaned_data['first_name']
         last_name = form.cleaned_data['last_name']
@@ -119,7 +119,7 @@ class LogoutSessionView(TemplateView):
             Token.objects.get(key = session_token).delete()
         except ObjectDoesNotExist:
             pass
-        #request.session.flush()
+        request.session.flush()
         response = super().get(request)
         return response
         
