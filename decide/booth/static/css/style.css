@@ -1,0 +1,62 @@
+.button {
+    float:left;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 16px;
+    transition-duration: 0.05s;
+    border-radius: 4px 4px 4px 4px;
+    color: black; 
+    background-color: white;
+}
+
+.buttonyes { 
+    border: 2px solid green;
+}
+
+.buttonyes:hover { 
+    background-color: green; 
+    color: white; 
+}
+
+.buttonno { 
+    margin-left: 50px; 
+    border: 2px solid red; 
+}
+
+.buttonno:hover { 
+    background-color: red; 
+    color: white; 
+}
+
+.buttonseveral { 
+    float:none; 
+    margin-left: 50px; 
+    border: 2px solid blue; 
+}
+
+.buttonseveral:hover { 
+    background-color: blue; 
+    color: white; 
+}
+
+body {
+    margin-right: auto;
+    margin-left:  auto;
+    font-family: sans-serif;
+    max-width: 960px;
+    padding-right: 10px;
+    padding-left:  10px;
+}
+
+#styleDiv {
+    border-style:solid;
+    border-wodth: 2px;
+    border-height:10px;
+    border-color: black;
+    border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    border: 1px solid #000000;
+    padding:5px;
+    background-color: #ADD8E6;
+}
