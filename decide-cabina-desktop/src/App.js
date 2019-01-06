@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-class App extends Component {
+import "./App.css";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Voting from "./pages/Voting";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+export default class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to asdf/Electron</h2>
-        </div>
-        <p className="App-intro">
-          Hello Electron!
-        </p>
-      </div>
+      <Router>
+        <React.Fragment>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/voting" component={Voting} />
+        </React.Fragment>
+      </Router>
     );
   }
 }
-
-export default App;
