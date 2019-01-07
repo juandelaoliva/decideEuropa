@@ -77,7 +77,7 @@ class ActivateAccountView(FormView):
         return HttpResponseRedirect('/')
 
 
-class RequestAuthEmailCodeView(FormView):
+class RequestLoginView(FormView):
     template_name = 'request_auth_email.html'
     form_class = RequestAuthEmailForm
     success_url = '/authentication/login-auth-email/'

@@ -3,7 +3,6 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from authentication.views import GetUserView, LogoutView, RegisterUserView, RequestAuthEmailCodeView, LoginEmailCodeView, ActivateAccountView, LogoutSessionView
 
-
 urlpatterns = [
     path('login/', obtain_auth_token),
     path('logout/', LogoutView.as_view()),
