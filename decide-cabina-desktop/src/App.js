@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./App.css";
+import "./styles/App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Voting from "./pages/Voting";
@@ -13,7 +13,7 @@ export default class App extends Component {
         <React.Fragment>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/voting" component={Voting} />
+          <Route path="/voting/:id" component={Voting} />
         </React.Fragment>
       </Router>
     );

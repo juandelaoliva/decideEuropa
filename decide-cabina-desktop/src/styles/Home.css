@@ -1,0 +1,44 @@
+div#container {
+    margin: 0px 50px;
+}
+
+div#container > * {
+    color: white;
+}
+
+div#container > main > div {
+    display: flex;
+    align-items: center;
+    align-content:center;
+}
+
+div#container > main > div > p {
+    flex: 1;
+}
+
+div#container > main > div > div.btn {
+    float: right;
+}
+
+div#container > main > div > div.btn > a{
+    margin: 0px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn {
+    background: gray;
+    padding: 5px 7.5px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.btn-green {
+    background: green;
+    border: 1px solid rgb(0, 96, 0);
+}
+
+.btn-red {
+    background: red;
+    border: 1px solid rgb(184, 0, 0);
+}
