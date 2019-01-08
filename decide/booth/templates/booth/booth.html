@@ -3,12 +3,13 @@
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+	
     <h1>{{ voting.id }} - {{ voting.name }}</h1>
+    {% if voting.desc %}
     <div id="styleDiv">
         <p> {{ voting.desc }} </p>            	 
     </div>
-
+	{% endif %}
     <div id="login">
         <label for="username">{% trans "Username" %}</label>
         <input type="text" id="username" name="username" value=""/>
