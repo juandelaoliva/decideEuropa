@@ -138,25 +138,6 @@ class LoginEmailTestCase(TestCase):
             res = True
         self.assertEqual(res, True)
 
-    # Usuario introduce email vacío
-    def test_send_empty_email(self):
-        res = False
-        email = ''
-        try:
-            login_email_auth(email)
-        except IllegalArgumentException:
-            res = True
-        self.assertEqual(res, True)
-
-    #Usuario introduce email no válido
-    def test_send_noValidEmail(self):
-        res = False
-        email = 'aaaa'
-        try:
-            login_email_auth(email)
-        except IllegalArgumentException:
-            res = True
-        self.assertEqual(res, True)
     def test_register_user(self):
         res = False
         username = 'username'
