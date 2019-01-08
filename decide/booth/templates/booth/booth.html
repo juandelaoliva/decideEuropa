@@ -94,7 +94,7 @@
             {% endif %}
 
             {% if opt.option != 'Si' and opt.option != 'Sí' and opt.option != 'Yes' and opt.option != 'No'%}
-                <input id="q{{opt.number}}" type="radio" name="question" value="{{opt.number}}" />{{opt.option}}<br/>
+                <input class="button buttonseveral" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
             {% endif %}
             </label>
 
