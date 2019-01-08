@@ -94,10 +94,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
         'DIRS': [
-		AUTH_TEMPLATE_PATH
+		AUTH_TEMPLATE_PATH,
+        os.path.join(BASE_DIR, 'templates')
 	],
-
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -190,7 +189,8 @@ django_heroku.settings(locals())
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # import django_heroku
 # django_heroku.settings(locals())

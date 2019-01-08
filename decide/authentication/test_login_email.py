@@ -2,11 +2,11 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from authentication.services import send_mail_2_steps_auth, login_email_auth, register_user, activate_account_recently_registered, search_user_by_username_and_password
-from authentication.models import TwoStepsAuth, UserStatus
+from .services import send_mail_2_steps_auth, login_email_auth, register_user, activate_account_recently_registered, search_user_by_username_and_password
+from .models import TwoStepsAuth, UserStatus
 from django.contrib.auth.hashers import make_password
 
-from authentication.exceptions import IllegalArgumentException
+from .exceptions import IllegalArgumentException
 from django.core.exceptions import ObjectDoesNotExist
 
 class LoginEmailTestCase(TestCase):
@@ -190,7 +190,3 @@ class LoginEmailTestCase(TestCase):
             res = True
         self.assertEqual(res, True)
         
-        
-        
-
-    
