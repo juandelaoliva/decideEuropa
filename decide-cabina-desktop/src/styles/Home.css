@@ -31,6 +31,11 @@ div#container > main > div > div.btn > a{
     padding: 5px 7.5px;
     display: inline-block;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: dodgerblue;
 }
 
 .btn-green {
@@ -41,4 +46,11 @@ div#container > main > div > div.btn > a{
 .btn-red {
     background: red;
     border: 1px solid rgb(184, 0, 0);
+}
+
+.btn-blue {
+    background: rgb(30, 144, 255);
+    border: 1px solid rgb(21, 114, 208);
+    font-size: 17.5px;
+    color: white;
 }

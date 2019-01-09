@@ -39,15 +39,15 @@ export default class MainPage extends Component {
       }
     }
 
-    return res == true ? (
+    return res === true ? (
       <div className="btn btn-green">
         <Link to={"/voting/" + id}>Ir a la votación</Link>
       </div>
     ) : (
       <div className="btn btn-red">
-        {res == "no_started" ? (
+        {res === "no_started" ? (
           <p>La votación no ha comenzado, comienda {start_date}</p>
-        ) : res == "eneded" ? (
+        ) : res === "eneded" ? (
           <p>La votación ya acabó el día {end_date}</p>
         ) : (
           <p>No disponible</p>
@@ -58,23 +58,25 @@ export default class MainPage extends Component {
 
   render() {
     return (
-      <div id="container">
+      <React.Fragment>
         <Header />
-        <h2>Votaciones</h2>
-        <main>
-          {this.state.votings.map(voting => (
-            <React.Fragment key={voting.id}>
-              <div className="voting">
-                <p>
-                  {voting.name}: <small>{voting.desc}</small>
-                </p>
-                {this.isVotingActived(voting)}
-              </div>
-              <hr />
-            </React.Fragment>
-          ))}
-        </main>
-      </div>
+        <div id="container">
+          <h2>Votaciones</h2>
+          <main>
+            {this.state.votings.map(voting => (
+              <React.Fragment key={voting.id}>
+                <div className="voting">
+                  <p>
+                    {voting.name}: <small>{voting.desc}</small>
+                  </p>
+                  {this.isVotingActived(voting)}
+                </div>
+                <hr />
+              </React.Fragment>
+            ))}
+          </main>
+        </div>
+      </React.Fragment>
     );
   }
 }
