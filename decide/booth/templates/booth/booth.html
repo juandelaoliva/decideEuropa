@@ -4,12 +4,20 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 	
-    <h1>{{ voting.id }} - {{ voting.name }}</h1>
+    <h1 style="left:0; display:inline;">{{ voting.id }} - {{ voting.name }}</h1>
+    <div id="guideTitle" class="divGuide" style="padding:10px;margin:10px;">
+    {% trans "Title of the voting" %}
     {% if voting.desc %}
-    <div id="styleDiv">
-        <p> {{ voting.desc }} </p>            	 
+    <input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertDescription()"/>
+    {%else%}
+    {% if start_date == None%}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertDateNotStart()"/>
+    {%else%}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertDateStart()"/>
+    {% endif %}
+    {% endif %}
     </div>
-	{% endif %}
+    
     <div id="login">
         <label for="username">{% trans "Username" %}</label>
         <input type="text" id="username" name="username" value=""/>
@@ -20,28 +28,77 @@
         <input type="submit" value="{% trans "Login" %}" onClick="decideLogin()"/>
     </div>
 	
-    <div id="voting">
+     <div id="voting">
         <br/>
-    	<div id="styleDiv">
+        {% if voting.desc %}
+        <div id="styleDiv">
+        	<p id="textDescription"> {{ voting.desc }} </p>
+        	<p id="guideDescription" class="divGuide" style="padding:0px;margin:0px;">
+    		{% trans "This is the description of the voting" %}
+    	
+    		{% if start_date == None%}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertDateNotStart()"/>
+    		{%else%}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertDateStart()"/>
+    		{% endif %}
+    		</p>              	 
+    	</div>
+    	{% endif %}
+    	<br/>
+    	<div class="styleDiv">
         {% if start_date == None%}
-        	<p>La votación no ha empezado aún</p>
+        	<p id="pDateNotStart" style="left:0;">{% trans "The votation has not started yet" %}</p>
+        	<div id="guideDateNotStart" class="divGuide" style="padding:5px;margin:5px;">
+    			{% trans "This message indicates you that the voting has not started" %}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertLinkLogOut()"/>
+    		</div>
         
         {%else%}
-        	<p>La votación empezó el: {{ start_date }}</p>
-	        
-	        {%if end_date == None%}
-	        	<p>Aún puede votar, no ha finalizado la votación</p>
+        	<p id="pDate" style="left:0;">{% trans "The votation started:" %}{{ start_date }}</p>
+        	<div id="guideDate" class="divGuide" style="margin-left:20px;padding:5px;">
+    			{% trans "This represents the date that the voting started" %}
+   			{%if end_date == None%}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertStillVote()"/>
 	        {% else %}
-	        	<p>Ya no puede votar, la votación se cerró el: {{ end_date }}</p>
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertNotStillVote()"/>
+    		{% endif %}
+	        </div>
+	        <br>
+	        {%if end_date == None%}
+	        	<p id="pStillVote" style="left:0;">{% trans "You can still vote, the voting has not finished" %}</p>
+	        	<div id="guideStillVote" class="divGuide" style="margin-left:20px;padding:5px;">
+    			{% trans "The voting has not finished yet then you can vote" %}
+    			<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertLinkLogOut()"/>
+    			</div>
+    			<br>
+	        {% else %}
+	        	<p id="pStillNotVote" style="left:0;">{% trans "You can not vote now, the voting closed:" %}{{ end_date }}</p>
+	        	<div id="guideNotStillVote" class="divGuide" style="margin-left:5px;padding:5px;">
+    			{% trans "The voting has finished,you can not vote" %}
+    			<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertLinkLogOut()"/>
+    			</div>
+    			<br>
         	 {% endif %}
         	 
         {% endif %}
         </div>
         <br/>
 
-        <a href="#" onClick="decideLogout()">{% trans "logout" %}</a>
+        <input class="buttonGuide" style="padding:10px;" type="submit" value="{% trans "Log Out" %}" onClick="decideLogout()" style="left:0; display:inline;"/>
+         <div id="guideLogOut" class="divGuide" style="margin-left:20px;padding:5px;">
+    		{% trans "This button works to log out" %}
+    		<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertQuestion()"/>
+		</div>
+    	<br/>
+    	<br/>
          
-        <h2>{{ voting.question.desc }}</h2>
+        <h2 style="left:0; display:inline;">{{ voting.question.desc }}</h2>
+        <div id="guideQuestion" class="divGuide" style="margin:20px;padding:20px;">
+    	{% trans "This is the title of the question" %}
+    	<input class="buttonGuide" type="submit" value="{% trans "Accept" %}" onClick="alertAnswers()"/>
+    	</div>
+    	<br/>
+    	<br/>
         
         {% comment %} Interfaz de votación Sí/No {% endcomment %}
         {% if voting.question.options|length == 2 %}{% for opt in voting.question.options %}
@@ -50,16 +107,26 @@
 
             {% if opt.option == 'Si' or opt.option == 'Sí' or opt.option == 'Yes'%}
                 <input class="button buttonyes" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
+                <div class="guideAnswer divGuide" style="margin:20px;padding:20px;">
+    			{% trans "Answer"%} {{forloop.counter}}
+    			</div>
             {% endif %}
 
             {% if opt.option == 'No'%}
                 <input class="button buttonno" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
+                <div class="guideAnswer divGuide" style="margin:20px;padding:20px;">
+    			{% trans "Answer"%} {{forloop.counter}}
+    			</div>
             {% endif %}
 
             {% if opt.option != 'Si' and opt.option != 'Sí' and opt.option != 'Yes' and opt.option != 'No'%}
                 <input class="button buttonseveral" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
+                <div class="guideAnswer divGuide" style="margin:20px;padding:20px;">
+    			{% trans "Answer"%} {{forloop.counter}}
+    			</div>
             {% endif %}
             </label>
+            <br/><br/>
 
         {% endfor %}{% endif %}
 
@@ -68,6 +135,9 @@
 
             <label for="q{{opt.number}}">
                 <input class="button buttonseveral" id="q{{opt.number}}" type="submit" name="question" value="{{opt.option}}" onClick="decideEncryptYesNo(this)"/>
+                <div class="guideAnswer divGuide" style="margin:20px;padding:20px;">
+    			{% trans "Answer"%} {{forloop.counter}}
+    			</div>
             </label>
             <br/><br/>
 
@@ -179,6 +249,112 @@
             decideLogout()
             }
         }
+        
+        function alertWelcome(){
+        	alert("{% trans "Welcome to the decide voting booth" %}"); 
+        	if(confirm("{% trans "Do you want to have a guide to vote?" %}"))
+            {
+        		alert("{% trans "Enjoy your guide" %}");
+        		alertTitle();
+            }
+        }
+        
+        function alertTitle(){ 
+        	if(document.querySelector("#styleDiv") != null){
+        	document.querySelector("#styleDiv").style.margin = "20px";
+        	}
+        	document.querySelector("#guideTitle").style.display = "inline";
+        }
+        
+        function alertDescription(){
+        	document.querySelector("#styleDiv").style.margin = "20px";
+        	document.querySelector("#guideTitle").style.display = "none";
+        	document.querySelector("#guideDescription").style.display = "inline";
+        	document.querySelector("#textDescription").style.display = "inline";
+        	
+        }
+        
+        function alertDateNotStart(){
+        	if(document.querySelector("#guideDescription") != null){
+        	document.querySelector("#guideDescription").style.display = "none";
+        	}
+        	if(document.querySelector("#textDescription") != null){
+        	document.querySelector("#textDescription").style.display = "";
+        	}
+        	document.querySelector("#guideTitle").style.display = "none";
+        	if(document.querySelector("#styleDiv") != null){
+            	document.querySelector("#styleDiv").style.margin = "10px";
+            	};
+        	document.querySelector("#guideDateNotStart").style.display = "inline";
+        	document.querySelector("#pDateNotStart").style.display = "inline";
+        	
+        	
+        }
+        
+        function alertDateStart(){
+        	if(document.querySelector("#guideDescription") != null){
+            	document.querySelector("#guideDescription").style.display = "none";
+            }
+            if(document.querySelector("#textDescription") != null){
+            	document.querySelector("#textDescription").style.display = "";
+            }
+        	document.querySelector("#guideTitle").style.display = "none";
+        	if(document.querySelector("#styleDiv") != null){
+            	document.querySelector("#styleDiv").style.margin = "10px";
+            	}
+        	document.querySelector("#guideDate").style.display = "inline";
+        	document.querySelector("#pDate").style.display = "inline";
+        }
+        
+        function alertStillVote(){
+        	document.querySelector("#guideDate").style.display = "none";
+        	document.querySelector("#guideStillVote").style.display = "inline";
+        	document.querySelector("#pStillVote").style.display = "inline";
+        	document.querySelector("#pDate").style.display = "";
+        	
+        }
+        
+        function alertNotStillVote(){
+        	document.querySelector("#guideDate").style.display = "none";
+        	document.querySelector("#guideNotStillVote").style.display = "inline";
+        	document.querySelector("#pStillNotVote").style.display = "inline";
+        	document.querySelector("#pDate").style.display = "";
+        }
+        
+        function alertLinkLogOut(){
+        	if(document.querySelector("#guideDateNotStart") != null){
+        	document.querySelector("#guideDateNotStart").style.display = "none";
+        	}
+        	if(document.querySelector("#guideNotStillVote") != null){
+        	document.querySelector("#guideNotStillVote").style.display = "none";
+        	}
+        	if(document.querySelector("#guideStillVote") != null){
+        	document.querySelector("#guideStillVote").style.display = "none";
+        	}
+        	if(document.querySelector("#pDateNotStart") != null){
+            document.querySelector("#pDateNotStart").style.display = "";
+            }
+            if(document.querySelector("#pStillNotVote") != null){
+            document.querySelector("#pStillNotVote").style.display = "";
+            }
+            if(document.querySelector("#pStillVote") != null){
+            document.querySelector("#pStillVote").style.display = "";
+            }
+        	document.querySelector("#guideLogOut").style.display = "inline";
+        }
+        
+        function alertQuestion(){
+        	document.querySelector("#guideLogOut").style.display = "none";
+        	document.querySelector("#guideQuestion").style.display = "inline";
+        }
+        
+        function alertAnswers(){
+        	document.querySelector("#guideQuestion").style.display = "none";
+        	var selects = document.getElementsByClassName("guideAnswer");
+        	for (var i = 0; i<selects.length;++i){
+        		selects[i].style.display = "inline"
+        	} 
+        }
 
         function decideLogout() {
             var data = { token: token };
@@ -188,6 +364,37 @@
             user = null;
             document.cookie = 'decide=;';
             panel('login');
+            var selects = document.getElementsByClassName("guideAnswer");
+        	for (var i = 0; i<selects.length;++i){
+        		selects[i].style.display = "none"
+        	}
+        	if(document.querySelector("#guideTitle")!= null){
+        		document.querySelector("#guideTitle").style.display = "none";
+        	}
+        	if(document.querySelector("#guideDescription")!= null){
+        		document.querySelector("#guideDescription").style.display = "none";
+        	}
+        	if(document.querySelector("#textDescription")!= null){
+        		document.querySelector("#textDescription").style.display = "";
+        	}
+        	if(document.querySelector("#guideDateNotStart")!= null){
+        		document.querySelector("#guideDateNotStart").style.display = "none";
+        	}
+        	if(document.querySelector("#guideDate")!= null){
+        		document.querySelector("#guideDate").style.display = "none";
+        	}
+        	if(document.querySelector("#guideStillVote")!= null){
+        		document.querySelector("#guideStillVote").style.display = "none";
+        	}
+        	if(document.querySelector("#guideNotStillVote")!= null){
+        		document.querySelector("#guideNotStillVote").style.display = "none";
+        	}
+        	if(document.querySelector("#guideLogOut")!= null){
+        		document.querySelector("#guideLogOut").style.display = "none";
+        	}
+        	if(document.querySelector("#guideQuestion")!= null){
+        		document.querySelector("#guideQuestion").style.display = "none";
+        	}
         }
 
         function decideUser() {
@@ -196,6 +403,7 @@
               .then(data => {
                 user = data;
                 panel('voting');
+                alertWelcome();
               }).catch(error => {
                 alert("{% trans "Error: " %}" + error);
               });
