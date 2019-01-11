@@ -41,47 +41,4 @@ deploy:
     secure: MbDKySbubTWTYD4VmHl6unTc2Qd9VKiPm2+0cItpLH8SiqiBL45LQawc8XygUrqReOz7/YwPQz8XoXesTjViM4lyN6Uk89rUebb8E1SVZ3EWbrl49ywAzwLliKe3kVWksVCINBU5nAn41njyovnmaKMxYDSSeNhFytcemPkkVICh5U/6nq9fETaJokKhxwScfQwkiKLmpIRRJeeUitNSwow+3wvO/Ehr4R7ST/hR/J7qc7bkRn6pQCREBqbAXvfCNqenbAd9d3GuUPVUX4+v+ZqZtLa1jYsaQnDsH6VqDEtE0FVIlJR/7Mblk77ccEYOE+p4JEt6oTZkXJs5SAItbYAdN8JlpxNE5STtrQWxaZFw6Wa14IqPo5YTSvIuyV/GHY1iUuTxsYrmBTPA23HD9Mq06ufSUDI2+hBSVOzfhz+jrLzoo64JTz4KVIimTupHEKKLiARA/yGoiZcVztH0g40/TpavJe59kHa9oVY3+FzsZNtTxBDnfVSJqD39SygiKzyyRl0tdNfMWXBK4E9BMaNgC+N8vu8G31ffZ54MvEXINh5V6ITe1CnGZ+d+UyFflkf/Km53T9goFjgzH8EYmpkKYjTtSSNQ3w0R/Cof8XQroWwTJOChK/ViGTncK/cJ9nbwxcGHJolZl5aVIPyLIjHJdFraiyQiElbCfIS4Nbc=
   file: sourceCode.zip
   on:
-    repo: decide-europa-postproc/Decide_Europa_Postproclanguage: python
-python:
-- '3.6'
-- '3.5'
-matrix:
-  include:
-  - python: 3.7.1
-    dist: xenial
-    sudo: true
-services:
-- postgresql
-env:
-- DJANGO_VERSION=2.0 DB=postgres
-global:
-- PGPORT=5432
-before_install:
-- cd decide
-install:
-- pip install -q Django==$DJANGO_VERSION
-before_script:
-- cp local_settings.travis.py local_settings.py
-- psql -c "create user decide with password 'decide'"
-- psql -c "ALTER USER decide WITH SUPERUSER;"
-- psql -c "create database decide owner decide"
-- python manage.py migrate
-script:
-- python3 manage.py test postproc
-before_deploy:
-- cd ..
-- rm -rf foobar || exit 0
-- mkdir foobar
-- tar -czf sourceCode.tar.gz foobar
-- zip -r sourceCode.zip foobar
-- value=`date "+%y.%m.%d.%H.%M.%S"`
-- git tag v.$value
-addons:
-  postgresql: '9.6'
-deploy:
-  provider: releases
-  api_key:
-    secure: MbDKySbubTWTYD4VmHl6unTc2Qd9VKiPm2+0cItpLH8SiqiBL45LQawc8XygUrqReOz7/YwPQz8XoXesTjViM4lyN6Uk89rUebb8E1SVZ3EWbrl49ywAzwLliKe3kVWksVCINBU5nAn41njyovnmaKMxYDSSeNhFytcemPkkVICh5U/6nq9fETaJokKhxwScfQwkiKLmpIRRJeeUitNSwow+3wvO/Ehr4R7ST/hR/J7qc7bkRn6pQCREBqbAXvfCNqenbAd9d3GuUPVUX4+v+ZqZtLa1jYsaQnDsH6VqDEtE0FVIlJR/7Mblk77ccEYOE+p4JEt6oTZkXJs5SAItbYAdN8JlpxNE5STtrQWxaZFw6Wa14IqPo5YTSvIuyV/GHY1iUuTxsYrmBTPA23HD9Mq06ufSUDI2+hBSVOzfhz+jrLzoo64JTz4KVIimTupHEKKLiARA/yGoiZcVztH0g40/TpavJe59kHa9oVY3+FzsZNtTxBDnfVSJqD39SygiKzyyRl0tdNfMWXBK4E9BMaNgC+N8vu8G31ffZ54MvEXINh5V6ITe1CnGZ+d+UyFflkf/Km53T9goFjgzH8EYmpkKYjTtSSNQ3w0R/Cof8XQroWwTJOChK/ViGTncK/cJ9nbwxcGHJolZl5aVIPyLIjHJdFraiyQiElbCfIS4Nbc=
-  file: sourceCode.zip
-  on:
     repo: decide-europa-postproc/Decide_Europa_Postproc
