@@ -64,7 +64,7 @@ export default class Login extends React.Component {
           <main id="login">
             <form>
               <div>
-                <label for="username">Nombre de usuario</label>
+                <label htmlFor="username">Nombre de usuario</label>
                 <input
                   type="text"
                   name="username"
@@ -73,7 +73,7 @@ export default class Login extends React.Component {
                 />
               </div>
               <div>
-                <label for="password">Contraseña</label>
+                <label htmlFor="password">Contraseña</label>
                 <input
                   type="password"
                   name="password"
@@ -81,7 +81,7 @@ export default class Login extends React.Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <button type="submit" class="btn btn-blue" onClick={this.login}>
+              <button type="submit" className="btn btn-blue" onClick={this.login}>
                 Iniciar sesión
               </button>
               {this.state.err ? (
