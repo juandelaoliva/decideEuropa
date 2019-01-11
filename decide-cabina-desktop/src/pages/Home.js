@@ -24,7 +24,7 @@ export default class MainPage extends Component {
   isVotingActived({ start_date, end_date, id }) {
     var res = false;
     if (start_date === null && end_date === null) {
-      res = true;
+      res = "no_started";
     } else if (start_date !== null) {
       start_date = new Date(start_date);
       let now = Date.now();
@@ -46,11 +46,13 @@ export default class MainPage extends Component {
     ) : (
       <div className="btn btn-red">
         {res === "no_started" ? (
-          <p>La votación no ha comenzado, comienda {start_date}</p>
+          <p style={{ margin: "0px" }}>La votación no ha comenzado aún</p>
         ) : res === "eneded" ? (
-          <p>La votación ya acabó el día {end_date}</p>
+          <p style={{ margin: "0px" }}>
+            La votación ya acabó el día {end_date}
+          </p>
         ) : (
-          <p>No disponible</p>
+          <p style={{ margin: "0px" }}>No disponible</p>
         )}
       </div>
     );
