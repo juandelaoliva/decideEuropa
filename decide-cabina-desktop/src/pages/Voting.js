@@ -30,11 +30,11 @@ export default class Voting extends React.Component {
       body: JSON.stringify({
         voting: this.state.votingId,
         voter: this.state.answer,
-        token: this.state.userAuth
+        token: this.state.userAuth.token
       }),
       headers: {
         "Content-type": "application/json",
-        "Authorization": "Token " + this.state.userAuth
+        "Authorization": "Token " + this.state.userAuth.token
       }
     })
       .then(res => res.json())
@@ -54,8 +54,8 @@ export default class Voting extends React.Component {
     });
   }
 
-  loginUser(token) {
-    this.setState({ ...this.state, userAuth: token });
+  loginUser(auth) {
+    this.setState({ ...this.state, userAuth: auth });
   }
 
   componentDidUpdate(_, prevState) {

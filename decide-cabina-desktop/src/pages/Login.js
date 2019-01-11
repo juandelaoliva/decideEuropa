@@ -37,7 +37,21 @@ export default class Login extends React.Component {
         if (data.token === undefined) {
           this.setState({ ...this.state, err: data });
         } else {
-          this.props.loginUser(data.token);
+          var auth = { token: data.token };
+
+          fetch("https://clebaltest.herokuapp.com/authentication/getuser/", {
+            method: "POST",
+            body: JSON.stringify(auth),
+            headers: {
+              "Content-type": "application/json"
+            }
+          })
+            .then(res => res.json())
+            .then(userDetails => {
+              auth = { ...auth, id: userDetails.id };
+              this.props.loginUser(auth);
+            })
+            .catch(err => this.setState({ ...this.state, err: err }));
         }
       })
       .catch(err => this.setState({ ...this.state, err: err }));
@@ -54,7 +68,12 @@ export default class Login extends React.Component {
         <Header />
         <div style={{ position: "absolute", top: "20px", left: "25px" }}>
           <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-            <span role="img" aria-label="Back home" aria-labelledby="home" style={{ fontSize: "25px" }}>
+            <span
+              role="img"
+              aria-label="Back home"
+              aria-labelledby="home"
+              style={{ fontSize: "25px" }}
+            >
               ⬅️
             </span>
           </Link>
@@ -81,7 +100,11 @@ export default class Login extends React.Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <button type="submit" className="btn btn-blue" onClick={this.login}>
+              <button
+                type="submit"
+                className="btn btn-blue"
+                onClick={this.login}
+              >
                 Iniciar sesión
               </button>
               {this.state.err ? (
