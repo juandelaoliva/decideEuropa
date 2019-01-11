@@ -39,7 +39,7 @@ export default class Login extends React.Component {
         } else {
           var auth = { token: data.token };
 
-          fetch("https://clebaltest.herokuapp.com/authentication/getuser/", {
+          fetch("https://decide-europa-cabina.herokuapp.com/authentication/getuser/", {
             method: "POST",
             body: JSON.stringify(auth),
             headers: {
