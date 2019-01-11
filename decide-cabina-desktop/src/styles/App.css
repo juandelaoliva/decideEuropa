@@ -22,3 +22,13 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+div#err {
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  background: rgb(245, 14, 14);
+  color: white;
+  border-radius: 5px;
+  padding: 15px;
+}

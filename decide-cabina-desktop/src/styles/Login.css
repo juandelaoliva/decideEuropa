@@ -36,12 +36,3 @@ main#login > form > button {
     margin: auto;
     margin-top: 30px;
 }
-
-div#err {
-    position: absolute;
-    left: 25px;
-    bottom: 25px;
-    background: rgb(245, 14, 14);
-    color: white;
-    border-radius: 5px;
-}

@@ -25,27 +25,31 @@ export default class Voting extends React.Component {
 
     this.setState({ ...this.state, err: null });
 
-    fetch("https://decide-europa-cabina.herokuapp.com/store/", {
-      method: "POST",
-      body: JSON.stringify({
-        voting: this.state.votingId,
-        voter: this.state.answer,
-        token: this.state.userAuth.token
-      }),
-      headers: {
-        "Content-type": "application/json",
-        "Authorization": "Token " + this.state.userAuth.token
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (JSON.stringify(data) === JSON.stringify({})) {
-          this.setState({ ...this.state, err: data });
-        } else {
-          this.props.history.push("/");
+    if (this.state.answer == null) {
+      this.setState({ ...this.state, err: "Debe seleccionar una respuesta" });
+    } else {
+      fetch("https://decide-europa-cabina.herokuapp.com/store/", {
+        method: "POST",
+        body: JSON.stringify({
+          vote: { a: "", b: "" },
+          voting: this.state.votingId,
+          voter: this.state.userAuth.id,
+          token: this.state.userAuth.token
+        }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Token " + this.state.userAuth.token
         }
       })
-      .catch(err => this.setState({ ...this.state, err: err }));
+        .then(async res => {
+          if (res.status !== 200) {
+            this.setState({ ...this.state, err: "Ha habido algún problema" });
+          } else {
+            this.props.history.push("/");
+          }
+        })
+        .catch(err => this.setState({ ...this.state, err: err }));
+    }
   }
 
   handleOptionChange(changeEvent) {
@@ -61,7 +65,7 @@ export default class Voting extends React.Component {
   componentDidUpdate(_, prevState) {
     if (prevState.userAuth === null && this.state.userAuth !== null) {
       fetch(
-        "http://decide-europa-cabina.herokuapp.com/voting/?id=" +
+        "https://decide-europa-cabina.herokuapp.com/voting/?id=" +
           this.state.votingId
       )
         .then(res => res.json())
@@ -103,7 +107,7 @@ export default class Voting extends React.Component {
                     <input
                       type="radio"
                       name="answer"
-                      value={op.number}
+                      value={op.option}
                       className="form-check-input"
                       onChange={this.handleOptionChange}
                     />
@@ -117,11 +121,7 @@ export default class Voting extends React.Component {
             <button className="btn btn-green" onClick={this.submitForm}>
               Votar
             </button>
-            {this.state.err ? (
-              <div id="err">
-                Los credenciales no son válidas: {this.state.err}
-              </div>
-            ) : null}
+            {this.state.err ? <div id="err">{this.state.err}</div> : null}
           </div>
         </React.Fragment>
       );
