@@ -2,9 +2,16 @@ import os
 import os.path as path
 import hashlib
 import subprocess
+import sys
 
+#Evitamos un fallo en la consola
+S=1
+s=1
+n=0
+N= 0
+#----
 print("Configurando requirements.txt ...")
-f= open("requirements.txt", 'r')
+f= open("../requirements.txt", 'r')
 requirements= f.read()
 rewrite= True
 if path.exists("checkVersion.txt"):
@@ -16,28 +23,41 @@ if rewrite:
 	with open('checkVersion.txt','w') as content_file:
 			
 		print ("Instalando el requirements....")
-		cmd = 'pip3 install -r requirements.txt'
+		cmd = 'sudo pip3 install -r ../requirements.txt'
 		os.system(cmd)
 		content_file.write(str(hashlib.sha256(requirements).hexdigest()))
 		
 
 
 print ("Migrando la BD....")
-cmd = 'cd decide && ./manage.py migrate'
+cmd = './manage.py migrate'
 returnedValue = subprocess.call(cmd, shell=True) 
 
 if returnedValue != 0:
 	print ("Al migrar la BD algo fue mal...")
 else:
-	print ("Ejecutando los tests ...")
-	cmd = 'cd decide && sudo ./manage.py test'
-	returnedValue = subprocess.call(cmd, shell=True)  
+	if len(sys.argv)>=2:
+		ask= sys.argv[1]
+		
+	else:
+		ask= input("Desea ejecutar los tests? S/n")
 
-	if returnedValue != 0:
-		print ('Los Test han fallado')
+	if int(ask):
+		print ("Ejecutando los tests ...")
+		cmd = './manage.py test'
+		returnedValue = subprocess.call(cmd, shell=True)  
 
+		if returnedValue != 0:
+			print ('Los Test han fallado')
+
+		else:
+			print ("Desplegando app....")
+			cmd = './manage.py runserver'
+			os.system(cmd)
 	else:
 		print ("Desplegando app....")
-		cmd = 'cd decide && ./manage.py runserver'
-		os.system(cmd)
+		cmd = './manage.py runserver'
+		if not (len(sys.argv)==3 and sys.argv[2]=="test"):
+			os.system(cmd)
+
 
