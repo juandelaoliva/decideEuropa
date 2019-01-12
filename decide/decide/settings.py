@@ -57,6 +57,8 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'base.backends.AuthBackend',
+    'axes.backends.AxesModelBackend',
+    'django.contrib.auth.backends.ModelBakend',
 ]
 
 MODULES = [
@@ -91,7 +93,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-		AUTH_TEMPLATE_PATH
+		AUTH_TEMPLATE_PATH ,
+        os.path.join(BASE_DIR, 'templates')
 	],
 
         'APP_DIRS': True,
@@ -105,6 +108,21 @@ TEMPLATES = [
         },
     },
 ]
+# new lock out fail attends
+CACHES = {
+'default': {
+'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+},
+'axes_cache': {
+'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+}
+}
+
+AXES_CACHE = 'axes_cache'
+AXES_CACHE_LIMIT = 4
+AXES_COOLOFF_TIME = 0.005
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 WSGI_APPLICATION = 'decide.wsgi.application'
@@ -161,11 +179,14 @@ STATIC_URL = '/static/'
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
+APIS = {}
 
 try:
     from local_settings import *
 except ImportError:
     print("local_settings.py not found")
 
+import django_heroku
+django_heroku.settings(locals())
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
