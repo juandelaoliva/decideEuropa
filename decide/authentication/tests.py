@@ -27,15 +27,11 @@ class AuthTestCase(APITestCase):
 
         token = response.json()
         self.assertTrue(token.get('token'))
-        self.client.post('/authentication/logout/')
-
 
     def test_login_fail(self):
         data = {'username': 'voter1', 'password': '321'}
         response = self.client.post('/authentication/login/', data, format='json')
         self.assertEqual(response.status_code, 400)
-
-        self.client.post('/authentication/logout/')
 
     def test_getuser(self):
         data = {'username': 'voter1', 'password': '123'}
@@ -47,10 +43,11 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         user = response.json()
-
+<<<<<<< HEAD
+=======
+        self.assertEqual(user['id'], 1)
+>>>>>>> b6ea01d8a56abf85b27e1159e1e87158852d28a0
         self.assertEqual(user['username'], 'voter1')
-
-        self.client.post('/authentication/logout/')
 
     def test_getuser_invented_token(self):
         token = {'token': 'invented'}
@@ -101,9 +98,9 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
         user = response.json()
+        self.assertEqual(user['id'], 8)
         self.assertEqual(user['username'], 'voter1')
 
-        self.client.post('/authentication/logout/')
 
 
     def test_register_user_error(self):
@@ -116,39 +113,17 @@ class AuthTestCase(APITestCase):
         response = self.client.post('/authentication/login/', loginData, format='json')
         self.assertEqual(response.status_code, 400)
         token = response.json()
-        self.client.post('/authentication/logout/')
-
-    def test_register_user_valid2(self):
-        data = {'first_name': 'voter3', 'last_name': 'voter12', 'email': 'email2@email.com',
-                'username': 'charlie', 'password1': 'brown', 'password2': 'brown'
-                }
-        response = self.client.post('/authentication/register/', data, format='json')
-        self.assertEqual(response.status_code, 200)
-        loginData = {'username': 'charlie', 'password': 'brown'}
-        response = self.client.post('/authentication/login/', loginData, format='json')
-        self.assertEqual(response.status_code, 200)
-        token = response.json()
-
-        response = self.client.post('/authentication/getuser/', token, format='json')
-        self.assertEqual(response.status_code, 200)
-
-        user = response.json()
-        self.assertEqual(user['username'], 'charlie')
-        self.client.post('/authentication/logout/', loginData, format='json')
-
-        self.client.post('/authentication/logout/')
 
     def test_register_user_error_firt_name(self):
-        data = {'first_name': '', 'last_name': 'voter12', 'email': 'email1@email.com',
-                'username': 'voter1', 'password1': '123', 'password2': '123'
-                }
-        response = self.client.post('/authentication/register/', data, format='json')
-        self.assertEqual(response.status_code, 200)
-        loginData = {'voter1', '123'}
-        response = self.client.post('/authentication/login/', loginData, format='json')
-        self.assertEqual(response.status_code, 400)
-        token = response.json()
-        self.client.post('/authentication/logout/')
+            data = {'first_name': '', 'last_name': 'voter12', 'email': 'email1@email.com',
+                    'username': 'voter1', 'password1': '123', 'password2': '123'
+                    }
+            response = self.client.post('/authentication/register/', data, format='json')
+            self.assertEqual(response.status_code, 200)
+            loginData = {'voter1', '123'}
+            response = self.client.post('/authentication/login/', loginData, format='json')
+            self.assertEqual(response.status_code, 400)
+            token = response.json()
 
     def test_register_user_error_last_name(self):
         data = {'first_name': 'voter1', 'last_name': '', 'email': 'email1@email.com',
@@ -161,8 +136,6 @@ class AuthTestCase(APITestCase):
         self.assertEqual(response.status_code, 400)
         token = response.json()
 
-        self.client.post('/authentication/logout/')
-
     def test_register_user_error_user_name(self):
         data = {'first_name': 'voter1', 'last_name': 'voter12', 'email': 'email1@email.com',
                 'username': '', 'password1': '123', 'password2': '123'
@@ -173,5 +146,3 @@ class AuthTestCase(APITestCase):
         response = self.client.post('/authentication/login/', loginData, format='json')
         self.assertEqual(response.status_code, 400)
         token = response.json()
-
-        self.client.post('/authentication/logout/')
