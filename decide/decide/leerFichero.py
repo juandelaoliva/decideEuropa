@@ -12,8 +12,6 @@ def ficheroCorreoContrasena():
             else:
                 passwords.append(data[:-1])
     f.close()
-    print(emails)
-    print(passwords)
     return (emails, passwords)
 
 
