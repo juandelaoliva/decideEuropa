@@ -106,7 +106,7 @@ class RequestAuthEmailCodeView(FormView):
 class LoginEmailCodeView(FormView):
     template_name = 'login_auth_email.html'
     form_class = LoginAuthEmailForm
-    success_url = '/authentication/'
+    success_url = '/booth/votings/'
 
     def get(self, request):
         response = check_user_status_view(request, unauthenticated_required = True, unauthenticated_allowed = True)
