@@ -206,7 +206,6 @@ except ImportError:
 from decide.leerFichero import ficheroCorreoContrasena
 
 auth_email_data = ficheroCorreoContrasena()
-print(auth_email_data)
 
 # email configuration
 EMAIL_USE_TLS = True
