@@ -5,7 +5,7 @@ from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
-from base import mods
+from decide.base import mods
 
 
 class AuthTestCase(APITestCase):
@@ -126,7 +126,7 @@ class AuthTestCase(APITestCase):
 
         user = response.json()
         self.assertEqual(user['username'], 'voter1')
-'''
+    '''
     def test_register_user_valid2(self):
         data = {'first_name': 'voter3', 'last_name': 'voter12', 'email': 'email2@email.com',
                 'username': 'charlie', 'password1': 'brown', 'password2': 'brown'
@@ -143,7 +143,7 @@ class AuthTestCase(APITestCase):
 
         user = response.json()
         self.assertEqual(user['username'], 'charlie')
-'''
+    '''
     def test_register_user_error_firt_name(self):
             data = {'first_name': '', 'last_name': 'voter12', 'email': 'email1@email.com',
                     'username': 'voter1', 'password1': '123', 'password2': '123'
