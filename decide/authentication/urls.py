@@ -15,7 +15,7 @@ urlpatterns = [
     path('getuser/', GetUserView.as_view()),
     path('register/', RegisterUserView.as_view(), name = 'register'),
     path('activate-account/', ActivateAccountView.as_view()),
-    path('request-auth-email-code/', RequestAuthEmailCodeView.as_view()),
+    path('request-auth-email-code/', RequestAuthEmailCodeView.as_view(), name='login'),
     path('login-auth-email/', LoginEmailCodeView.as_view()),
     path('prueba/', RegisterUserView.as_view()),
 ]

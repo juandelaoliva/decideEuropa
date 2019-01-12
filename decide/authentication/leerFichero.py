@@ -1,14 +1,21 @@
-
-def ficheroCorreoContraseña():
-    with open("properties.txt") as f:
+#Los emails se escriben en las líneas pares y el pass en las impares
+#Por norma, el primer email y pass es el de decide-europa
+def ficheroCorreoContrasena():
+    emails = []
+    passwords = []
+    with open("authentication/emails.txt") as f:
         lines = f.readlines()
-        email = (lines[0].split(" = "))[1]
-        passw = (lines[1].split(" = "))[1]
-
+        for i in range (len(lines)):
+            data = (lines[i].split(" = "))[1]
+            if(i%2 == 0):
+                emails.append(data[:-1])
+            else:
+                passwords.append(data[:-1])
     f.close()
-    print(email,passw)
-    return (email, passw);
+    print(emails)
+    print(passwords)
+    return (emails, passwords)
 
 
 if __name__ == '__main__':
-    ficheroCorreoContraseña()
+    ficheroCorreoContrasena()
