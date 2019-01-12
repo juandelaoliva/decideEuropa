@@ -70,7 +70,7 @@ MODULES = [
     'voting',
 ]
 
-BASEURL = 'https://decide-heroku-ubuntu.herokuapp.com/'
+BASEURL = 'https://decidevisualizacion.herokuapp.com/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
