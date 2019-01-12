@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,10 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
-
-
-
-    'axes',
+    'bootstrap4',
+    'django_forms_bootstrap'
 ]
 
 REST_FRAMEWORK = {
@@ -58,8 +55,6 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'base.backends.AuthBackend',
-    'axes.backends.AxesModelBackend',
-    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MODULES = [
@@ -74,9 +69,7 @@ MODULES = [
     'voting',
 ]
 
-
-BASEURL = 'https://decide-europa-authentication.herokuapp.com/'
-
+BASEURL = 'http://localhost:8000'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -95,11 +88,10 @@ AUTH_TEMPLATE_PATH = os.path.join(BASE_DIR, 'authentication')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
         'DIRS': [
-		AUTH_TEMPLATE_PATH,
-        os.path.join(BASE_DIR, 'templates')
+		AUTH_TEMPLATE_PATH
 	],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,23 +105,8 @@ TEMPLATES = [
 ]
 
 
-#   new lock out fail attends
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    },
-    'axes_cache': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
-}
-
-AXES_CACHE = 'axes_cache'
-AXES_CACHE_LIMIT = 4
-AXES_COOLOFF_TIME = 0.005
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
 WSGI_APPLICATION = 'decide.wsgi.application'
+
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -176,32 +153,17 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
-APIS = {}
+
 try:
     from local_settings import *
 except ImportError:
     print("local_settings.py not found")
 
-import django_heroku
-django_heroku.settings(locals())
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
-
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-
-# import django_heroku
-# django_heroku.settings(locals())
-
-# Try to import django-heroku depending on Travis or Heroku
-try:
-    # Configure Django App for Heroku.
-    import django_heroku
-    django_heroku.settings(locals())
-except ImportError:
-    found = False
