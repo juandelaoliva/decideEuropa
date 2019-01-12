@@ -29,13 +29,11 @@ class UserDecideForm(forms.Form):
 class RequestAuthEmailForm(forms.Form):
     username = forms.CharField(max_length = 150)
     password = forms.CharField(min_length=8, max_length=150, widget=forms.PasswordInput)
-
     def clean(self):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
         password = cleaned_data.get('password')
         hashed_password = make_password(password)
-
         try:
             user = search_user_by_username_and_password(username, password)
         except ObjectDoesNotExist:
