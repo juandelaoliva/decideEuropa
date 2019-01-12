@@ -3,22 +3,33 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="titulo">{{ voting.id }} - {{ voting.name }}</h1>
+    <h1 class="titulo"><pre>         ID: {{ voting.id }}        Vote: {{ voting.name }}</pre></h1>
 
     {% if not voting.start_date %}
-        <h2>{% trans 'Voting not started' %}</h2>
+        <h2 class="titulo3">{% trans 'Voting not started' %}</h2>
     {% elif not voting.end_date %}
-        <h2>{% trans 'Voting is opened' %}</h2>
+        <h2 class="titulo3">{% trans 'Voting is opened' %}</h2>
     {% else %}
-        <h2>{% trans 'Results: ' %}</h2>
-        <ul>
-            {% for option in voting.postproc %}
-                <li>{{option.option}}: {{option.postproc}} <span>({{option.votes}})</span></li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
     <div id="chart-1">{{ output|safe }}</div>
 	<div id="chart-2">{{ output_2|safe }}</div>
+        <h2 class="titulo2">{% trans 'Detailed Results: ' %}</h2>
+        <table class="tabla">
+        <tr>
+            <th class="titulo_tabla1">Response</th>
+            <th class="titulo_tabla2">Votes</th>
+        </tr>
+            {% for option in voting.postproc %}
+            <tr>
+            <td class="valor_tabla">{{option.option}}</td>
+            <td class="valor_tabla">{{option.postproc}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td class="valor_tabla">Total</td>
+                <td class="valor_tabla">{{totalvotes}}</td>
+            </tr>
+        </table>
+        </ul>
+    {% endif %}
 
 {% endblock %}

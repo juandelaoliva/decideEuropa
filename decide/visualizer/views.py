@@ -9,13 +9,15 @@ from base import mods
 #Controlador vista visualizer
 def view(request,voting_id):
     #Asignacion de votacion con id voting_id, tomado de la url
-    voting = mods.get('voting', id = voting_id)
 
+    voting = mods.get('voting', params={'id' : voting_id})
+
+    totalvotes = 0
     aux = []
     for option in voting[0]["postproc"] :
         aux.append({"label" : ""+option["option"], "value": ""+str(option["votes"])})
-
-    aux.append({"label" : "auxiliar", "value": "100"})
+        print(option["votes"])
+        totalvotes = totalvotes + option["votes"]
 
     dataSource = {"chart": {
             "caption": "Porcentaje de Votos",
@@ -33,5 +35,5 @@ def view(request,voting_id):
     #Renderizacion de la vista con template 'visualizer/visualizer.html
     #y variable voting
     return render(request, 'visualizer/visualizer.html',
-                  {'voting': voting[0],'output' : pie3d.render(), 'chartTitle': 'Pie 3D Chart'})
+                  {'voting': voting[0],'output' : pie3d.render(), 'chartTitle': 'Pie 3D Chart', 'totalvotes': totalvotes})
 
