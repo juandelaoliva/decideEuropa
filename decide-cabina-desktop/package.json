@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "chai-enzyme": "^1.0.0-beta.1",
     "electron": "^4.0.1",
     "foreman": "^3.0.1",
     "react-scripts": "2.1.3"
   },
   "dependencies": {
+    "chai": "^4.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "react-test-renderer": "^16.7.0"
   },
   "homepage": "./",
   "main": "src/electron-starter.js",
