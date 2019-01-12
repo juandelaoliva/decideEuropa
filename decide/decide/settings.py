@@ -203,6 +203,8 @@ try:
 except ImportError:
     found = False
 
+from decide.leerFichero import ficheroCorreoContrasena
+
 auth_email_data = ficheroCorreoContrasena()
 print(auth_email_data)
 

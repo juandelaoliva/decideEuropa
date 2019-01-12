@@ -110,3 +110,4 @@ decide-env/bin/easy_install
 # Rama pablo
 .idea/
 decide/authentication/migrations
+*emails.txt

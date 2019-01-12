@@ -3,7 +3,7 @@
 def ficheroCorreoContrasena():
     emails = []
     passwords = []
-    with open("authentication/emails.txt") as f:
+    with open("decide/emails.txt") as f:
         lines = f.readlines()
         for i in range (len(lines)):
             data = (lines[i].split(" = "))[1]
