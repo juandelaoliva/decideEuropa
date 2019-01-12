@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { shallow } from "enzyme";
 
+import { getVotings, login, vote } from "./services/DecideAPI";
 
 it("Renderiza la aplicación completa sin problemas", () => {
   const div = document.createElement("div");
@@ -101,4 +102,21 @@ it("Escribir en el formulario para iniciar sesión", () => {
 
   expect(wrapper.state("loginForm")["username"]).to.equal("root");
   expect(wrapper.state("loginForm")["password"]).to.equal("adminadmin");
+});
+
+describe("Peticiones a la API de Decide", () => {
+  it("Devolver listado de votaciones", async () => {
+    let votings = await getVotings();
+    expect(typeof votings).to.equal(typeof []);
+  });
+
+  it("Iniciar sesión con la API", async () => {
+    let auth = await login({username: 'root', password:'adminadmin'});
+    expect(Object.keys(auth)).to.equal(['token', 'id']);
+  });
+
+  it("Iniciar sesión con la API con malas credenciales", async () => {
+    let auth = await login({username: 'adsf', password:'asdf'});
+    expect(JSON.stringify(auth)).to.equal(JSON.stringify({}));
+  });
 });
