@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_swagger',
 
-    'bootstrap4',
-    'django_forms_bootstrap'
+
+
     'axes',
 ]
 
