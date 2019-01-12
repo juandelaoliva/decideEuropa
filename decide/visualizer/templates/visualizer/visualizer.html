@@ -3,6 +3,9 @@
 {% load static %}
 
 {% block content %}
+{% if not carga %}
+    <h1 class="titulo">No existe votacion con esta ID</h1>  
+{% else %}
     <h1 class="titulo"><pre>         ID: {{ voting.id }}        Vote: {{ voting.name }}</pre></h1>
 
     {% if not voting.start_date %}
@@ -31,5 +34,6 @@
         </table>
         </ul>
     {% endif %}
+{% endif %}
 
 {% endblock %}

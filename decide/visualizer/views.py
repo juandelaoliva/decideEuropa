@@ -14,10 +14,13 @@ def view(request,voting_id):
 
     totalvotes = 0
     aux = []
-    for option in voting[0]["postproc"] :
-        aux.append({"label" : ""+option["option"], "value": ""+str(option["votes"])})
-        print(option["votes"])
-        totalvotes = totalvotes + option["votes"]
+    try: 
+        for option in voting[0]["postproc"] :
+            aux.append({"label" : ""+option["option"], "value": ""+str(option["votes"])})
+            totalvotes = totalvotes + option["votes"]
+    except:
+        carga=False
+        return render(request, 'visualizer/visualizer.html', {'carga':carga})
 
     dataSource = {"chart": {
             "caption": "Porcentaje de Votos",
