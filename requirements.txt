@@ -14,4 +14,3 @@ django-heroku
 pycryptodome==3.6.6
 django-bootstrap4==0.0.7
 
-

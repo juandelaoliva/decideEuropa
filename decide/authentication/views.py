@@ -74,7 +74,7 @@ class ActivateAccountView(FormView):
         password = form.cleaned_data['password']
         code = form.cleaned_data['code']
         activate_account_recently_registered(username, password, code)
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/authentication/')
 
 
 class RequestAuthEmailCodeView(FormView):
@@ -106,7 +106,7 @@ class RequestAuthEmailCodeView(FormView):
 class LoginEmailCodeView(FormView):
     template_name = 'login_auth_email.html'
     form_class = LoginAuthEmailForm
-    success_url = '/'
+    success_url = '/authentication/'
 
     def get(self, request):
         response = check_user_status_view(request, unauthenticated_required = True, unauthenticated_allowed = True)
