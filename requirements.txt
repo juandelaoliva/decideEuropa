@@ -13,4 +13,3 @@ sympy==1.3
 django-heroku
 pycryptodome==3.6.6
 
-
