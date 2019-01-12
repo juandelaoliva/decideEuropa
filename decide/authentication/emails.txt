@@ -1,2 +1,0 @@
-email = decideeuropa@gmail.com
-password = $I=D3C1D3=EUroPA=U$3

@@ -202,3 +202,13 @@ try:
     django_heroku.settings(locals())
 except ImportError:
     found = False
+
+auth_email_data = ficheroCorreoContrasena()
+print(auth_email_data)
+
+# email configuration
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = auth_email_data[0][0]
+EMAIL_HOST_PASSWORD = auth_email_data[1][0]
