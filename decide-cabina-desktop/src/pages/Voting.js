@@ -30,7 +30,12 @@ export default class Voting extends React.Component {
     if (this.state.answer == null) {
       this.setState({ ...this.state, err: "Debe seleccionar una respuesta" });
     } else {
-      vote(this.state.userAuth, this.state.votingId, null)
+      var { ElGamal, BigInt } = window; ElGamal.BITS = 256; 
+      let { pub_key } = this.state.voting; 
+      var bigpk = { p: BigInt.fromJSONObject(`${pub_key.p}`), g: BigInt.fromJSONObject(`${pub_key.g}`), y: BigInt.fromJSONObject(`${pub_key.y}`) }; 
+      var bigmsg = BigInt.fromJSONObject(this.state.answer); 
+      var cipher = ElGamal.encrypt(bigpk, bigmsg);
+      vote(this.state.userAuth, this.state.votingId, cipher)
         .then(_ => this.props.history.push("/"))
         .catch(err => this.setState({ ...this.state, err }));
     }

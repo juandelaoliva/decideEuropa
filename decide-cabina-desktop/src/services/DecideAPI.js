@@ -1,4 +1,4 @@
-const API_URL = "http://decide-europa-cabina.herokuapp.com";
+const API_URL = "http://decide-europa.herokuapp.com";
 
 async function getVotings() {
   return await fetch(API_URL + "/voting", {
@@ -46,7 +46,7 @@ function vote(auth, votingId, cipher) {
     fetch(API_URL + "/store/", {
       method: "POST",
       body: JSON.stringify({
-        vote: { a: "", b: "" },
+        vote: { a: cipher.alpha.toString(), b: cipher.beta.toString() },
         voting: votingId,
         voter: auth.id,
         token: auth.token
