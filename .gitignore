@@ -99,7 +99,15 @@ ENV/
 /site
 
 # mypy
+
+#Pycharm files
+.idea/
 .mypy_cache/
 .vscode/settings.json
 decide/db.sqlite3
 decide-env/bin/easy_install
+
+# Rama pablo
+.idea/
+decide/authentication/migrations
+*emails.txt
