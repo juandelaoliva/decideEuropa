@@ -17,6 +17,7 @@ class UserDecideForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
+        username = cleaned_data.get('username')
         password1 = cleaned_data.get('password1')
         password2 = cleaned_data.get('password2')
 
@@ -25,6 +26,13 @@ class UserDecideForm(forms.Form):
                 _("The passwords doesn't match"),
                 code = 'not_matching_passwords'
             )
+        try:
+            user = User.objects.get(username = username)
+            raise forms.ValidationError(
+                _("There is already a user account with that username"),
+                code = 'username_must_unique')
+        except ObjectDoesNotExist:
+            pass
 
 class RequestAuthEmailForm(forms.Form):
     username = forms.CharField(max_length = 150)

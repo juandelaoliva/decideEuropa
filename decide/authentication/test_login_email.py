@@ -1,5 +1,4 @@
 from django.test import TestCase
-
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from .services import send_mail_2_steps_auth, login_email_auth, register_user, activate_account_recently_registered, search_user_by_username_and_password
@@ -148,6 +147,7 @@ class LoginEmailTestCase(TestCase):
         register_user(username, password, email, first_name, last_name)
         search_user_by_username_and_password(username, password)
 
+    # Se trata de crear una cuenta sin aportar datos
     def test_register_user_all_blank(self):
         username = ''
         password = ''
@@ -155,7 +155,8 @@ class LoginEmailTestCase(TestCase):
         first_name = ''
         last_name = ''
         register_user(username, password, email, first_name, last_name)
-
+ 
+    # Se trata de activar la cuenta de un usuario que no tiene la correspondiente petición de activacion
     def test_activate_account_recently_registered(self):
         user = User.objects.get(username = 'usertest3')
         code = TwoStepsAuth.objects.get(user = user).code

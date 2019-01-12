@@ -43,9 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_swagger',
     'bootstrap4',
-
-
-
+    'axes',
 ]
 
 REST_FRAMEWORK = {
@@ -186,7 +184,34 @@ try:
 except ImportError:
     print("local_settings.py not found")
 
+<<<<<<< HEAD
 import django_heroku
 django_heroku.settings(locals())
-
+=======
 INSTALLED_APPS = INSTALLED_APPS + MODULES
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+# import django_heroku
+# django_heroku.settings(locals())
+
+# Try to import django-heroku depending on Travis or Heroku
+try:
+    # Configure Django App for Heroku.
+    import django_heroku
+    django_heroku.settings(locals())
+except ImportError:
+    found = False
+
+from decide.leerFichero import ficheroCorreoContrasena
+
+auth_email_data = ficheroCorreoContrasena()
+print(auth_email_data)
+>>>>>>> 2b3a864711f78879433ec4144fc0e4bd65e275ab
+
+# email configuration
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = auth_email_data[0][0]
+EMAIL_HOST_PASSWORD = auth_email_data[1][0]
