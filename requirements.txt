@@ -11,7 +11,6 @@ django-rest-swagger==2.2.0
 numpy == 1.15.4
 matplotlib == 1.4.3
 pandas == 0.15.2
-numpy== 1.9.3
 
 django-heroku
 gunicorn
