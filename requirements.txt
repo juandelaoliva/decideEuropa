@@ -10,7 +10,6 @@ django-rest-swagger==2.2.0
 
 numpy == 1.15.4
 matplotlib == 3.0.2
-pandas == 0.15.2
 
 django-heroku
 gunicorn
