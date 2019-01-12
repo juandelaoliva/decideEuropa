@@ -6,7 +6,6 @@ from .views import GetUserView, LogoutView, RegisterUserView, RequestAuthEmailCo
 
 from .views import GetUserView, LogoutView, RegisterUserView, RequestAuthEmailCodeView, LoginEmailCodeView, ActivateAccountView, LogoutSessionView
 
-app_name = 'authentication'
 urlpatterns = [
     path('login/', obtain_auth_token),
     path('accounts/', include('django.contrib.auth.urls')),  # new
