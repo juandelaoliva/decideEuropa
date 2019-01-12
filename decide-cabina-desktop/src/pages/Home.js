@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import "../styles/Home.css";
 
+import { getVotings } from "../services/DecideAPI";
+
 export default class MainPage extends Component {
   constructor(props) {
     super(props);
@@ -14,11 +16,7 @@ export default class MainPage extends Component {
   }
 
   componentDidMount() {
-    fetch("http://decide-europa-cabina.herokuapp.com/voting", {
-      method: "GET"
-    })
-      .then(res => res.json())
-      .then(data => this.setState({ votings: data }));
+    getVotings().then(votings => this.setState({ votings }));
   }
 
   isVotingActived({ start_date, end_date, id }) {

@@ -4,6 +4,8 @@ import Header from "../components/Header";
 
 import "../styles/Login.css";
 
+import { login as decideLogin } from "../services/DecideAPI";
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -25,36 +27,9 @@ export default class Login extends React.Component {
 
     this.setState({ ...this.state, err: null });
 
-    fetch("https://decide-europa-cabina.herokuapp.com/authentication/login/", {
-      method: "POST",
-      body: JSON.stringify(this.state.loginForm),
-      headers: {
-        "Content-type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.token === undefined) {
-          this.setState({ ...this.state, err: data });
-        } else {
-          var auth = { token: data.token };
-
-          fetch("https://decide-europa-cabina.herokuapp.com/authentication/getuser/", {
-            method: "POST",
-            body: JSON.stringify(auth),
-            headers: {
-              "Content-type": "application/json"
-            }
-          })
-            .then(res => res.json())
-            .then(userDetails => {
-              auth = { ...auth, id: userDetails.id };
-              this.props.loginUser(auth);
-            })
-            .catch(err => this.setState({ ...this.state, err: err }));
-        }
-      })
-      .catch(err => this.setState({ ...this.state, err: err }));
+    decideLogin(this.state.loginForm)
+      .then(auth => this.props.loginUser(auth))
+      .catch(err => this.setState({ ...this.state, err }));
   }
 
   handleChange(event) {

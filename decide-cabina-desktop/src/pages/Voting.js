@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Login from "./Login";
 import Header from "../components/Header";
 
+import { vote } from "../services/DecideAPI";
+
 export default class Voting extends React.Component {
   constructor(props) {
     super(props);
@@ -28,27 +30,9 @@ export default class Voting extends React.Component {
     if (this.state.answer == null) {
       this.setState({ ...this.state, err: "Debe seleccionar una respuesta" });
     } else {
-      fetch("https://decide-europa-cabina.herokuapp.com/store/", {
-        method: "POST",
-        body: JSON.stringify({
-          vote: { a: "", b: "" },
-          voting: this.state.votingId,
-          voter: this.state.userAuth.id,
-          token: this.state.userAuth.token
-        }),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: "Token " + this.state.userAuth.token
-        }
-      })
-        .then(async res => {
-          if (res.status !== 200) {
-            this.setState({ ...this.state, err: "Ha habido algún problema" });
-          } else {
-            this.props.history.push("/");
-          }
-        })
-        .catch(err => this.setState({ ...this.state, err: err }));
+      vote(this.state.userAuth, this.state.votingId, null)
+        .then(_ => this.props.history.push("/"))
+        .catch(err => this.setState({ ...this.state, err }));
     }
   }
 
