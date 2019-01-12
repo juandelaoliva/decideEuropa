@@ -46,7 +46,7 @@ class PostProcTestCase(APITestCase):
     def test_dhondt(self):
         data = {
             "type": "DHONDT",
-			"seats": "8",
+            "seats": "8",
             "options": [
                 { "option": "Option 1", "number": 1, "votes": 5 },
                 { "option": "Option 2", "number": 2, "votes": 0 },
@@ -71,8 +71,8 @@ class PostProcTestCase(APITestCase):
 
         values = response.json()
         self.assertEqual(values, expected_result)
-
-		def test_sainte_lague(self):
+	
+    def test_sainte_lague(self):
         data = {
             "type": "SAINTELAGUE",
             "seats": "20",

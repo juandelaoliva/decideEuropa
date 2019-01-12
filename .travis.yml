@@ -16,7 +16,7 @@ global:
 before_install:
 - cd decide
 install:
-- pip install -q Django==$DJANGO_VERSION
+- pip install -r ../requirements.txt
 before_script:
 - cp local_settings.travis.py local_settings.py
 - psql -c "create user decide with password 'decide'"
@@ -24,7 +24,7 @@ before_script:
 - psql -c "create database decide owner decide"
 - python manage.py migrate
 script:
-- python3 manage.py test postproc
+- python3 manage.py test
 before_deploy:
 - cd ..
 - rm -rf foobar || exit 0
