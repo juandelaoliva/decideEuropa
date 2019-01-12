@@ -184,10 +184,10 @@ try:
 except ImportError:
     print("local_settings.py not found")
 
-<<<<<<< HEAD
+
 import django_heroku
 django_heroku.settings(locals())
-=======
+
 INSTALLED_APPS = INSTALLED_APPS + MODULES
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -207,7 +207,7 @@ from decide.leerFichero import ficheroCorreoContrasena
 
 auth_email_data = ficheroCorreoContrasena()
 print(auth_email_data)
->>>>>>> 2b3a864711f78879433ec4144fc0e4bd65e275ab
+
 
 # email configuration
 EMAIL_USE_TLS = True
