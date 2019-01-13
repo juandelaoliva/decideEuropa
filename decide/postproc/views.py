@@ -43,10 +43,10 @@ class PostProcView(APIView):
         return Response(options)
         
     def equalityVoting(self, options, seats, method):
+
         groups = []
         divOptions = {}
         res = []
-        
         #Obtener grupos
         for opt in options:
             g = opt.get("group", "no_group")
@@ -86,7 +86,6 @@ class PostProcView(APIView):
         t = request.data.get('type', 'IDENTITY')
         groups = request.data.get('groups', False)
         opts = request.data.get('options', [])
-
         if groups:
             if t == 'DHONDT':
                 seats = int(float(request.data.get('seats', '8')))
