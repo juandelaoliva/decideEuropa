@@ -173,6 +173,8 @@ Una vez generada la issue pasaremos al desarrollo de la tarea.
 Para la implementacion de css en el projecto necesitaremos crear una carpeta static en la carpeta decide/decide/.
 En ella generaremos el documento css common, donde incluiremos los estilos a implementar en las vistas.
 
+![Optional Text](../master/rama-trabajo.png)
+
 Una vez generado el documento necesitamos referenciar la carpeta static en settings.py, facilitando asi posteriores referenciaciones a la misma.
 
 Una vez referenciadas procedemos a realizar los cambios en la vista base.html, haciendo participes asi a todas las vistas de la carpeta static/css/ ya que todas las vistas heredan de ella.
@@ -188,7 +190,11 @@ Terminados y comprobados los cambios en el projecto procedemos a subirlos a la r
         git commit -m "Implementacion de css"
         git push origin devManuel
         
- Comprobamos que los cambios se han subido con exito en la rama del desarrollador. Si no hay errores generamos un pull request de la rama master, abriendo con ella una nueva issue pidiendo la revision del codigo por otro desarrolador, esperando su visto bueno para realizar el merge con la rama master. El merge se realiza mediante los siguientes comandos:
+ Comprobamos que los cambios se han subido con exito en la rama del desarrollador. Si no hay errores generamos un pull request de la rama master, abriendo con ella una nueva issue pidiendo la revision del codigo por otro desarrolador.
+
+![Optional Text](../master/IssuePush.png)
+
+Esperando su visto bueno para realizar el merge con la rama master. El merge se realiza mediante los siguientes comandos:
  
         git checkout master
         git merge origin devManuel
