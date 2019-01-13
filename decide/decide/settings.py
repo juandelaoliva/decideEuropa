@@ -174,4 +174,3 @@ CORS_ORIGIN_WHITELIST = (
 
 import django_heroku
 django_heroku.settings(locals())
-
