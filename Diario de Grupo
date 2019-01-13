@@ -89,6 +89,13 @@ Reparto tareas de mejora básicas del subsistema.
 
 Subida de implementación de visualización de gráficas mediante la librería FusionCharts.
 
+[12 Diciembre 2018]
+
+Miembros:
+Todos los coordinadores de Decide-Europa excepto Voting. Reunión convocada por el coordinador de cabina.
+Tareas:
+Reunión con los coordinadores de Decide-Europa, para ver qué archivos daban conflicto en el repositorio padre y cómo se podrían solucionar estos conflictos
+
 [18 Diciembre 2018]
 Segundo Milestone del grupo decideEuropa/visualizacion
 
@@ -108,6 +115,13 @@ Realizar integración continua
 [20 Diciembre 2018]
 
 Traspaso de tareas desde Trello a gitHub mediante Issues.
+
+[2 Enero 2018]
+
+Miembros:
+Todos los coordinadores de Decide-Europa excepto Voting. Reunión convocada por el coordinador de cabina.
+Tareas:
+Reunión con los coordinadores de Decide-Europa, para comentar cómo realizar correctamente los pull request. También se comenta como se puede bajar los cambios de Decide-Europa a cada repositorio hijo, a la hora de realizar las pruebas antes de hacer el merge. Además, se explica cómo el coordinador de cabina ha configurado Heroku y TravisCI en Decide-Europa.
 
 [3 Enero 2018]
 
