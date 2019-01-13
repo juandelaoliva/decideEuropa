@@ -3,33 +3,91 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="titulo"><pre>         ID: {{ voting.id }}        Vote: {{ voting.name }}</pre></h1>
 
-    {% if not voting.start_date %}
-        <h2 class="titulo3">{% trans 'Voting not started' %}</h2>
-    {% elif not voting.end_date %}
-        <h2 class="titulo3">{% trans 'Voting is opened' %}</h2>
-    {% else %}
+    <h1 class="logo"><pre> Decide</pre></h1>
+    
+     <!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'grafica')">Gráfica</button>
+    <button class="tablinks" onclick="openCity(event, 'votantes')">Votantes</button>
+    <button class="tablinks" onclick="openCity(event, 'analisis')">Análisis</button>
+    <button class="tablinks" onclick="openCity(event, 'sobrenosotros')">Sobre nosotros</button>
+    <button class="tablinks" onclick="openCity(event, 'contacto')">Contacto</button>
+  </div>
+  
+  <!-- Tab content -->
+  <div id="grafica" class="tabcontent">
+    <h3>Grafica</h3>
+    <p>Esta es la grafica de resultados .</p>
     <div id="chart-1">{{ output|safe }}</div>
 	<div id="chart-2">{{ output_2|safe }}</div>
-        <h2 class="titulo2">{% trans 'Detailed Results: ' %}</h2>
-        <table class="tabla">
+  </div>
+  
+  <div id="votantes" class="tabcontent">
+    <h3>Tabla de votantes</h3>
+    <p>Esta es la tabla de votantes</p>
+    {% if not voting.start_date %}
+    <h2 class="titulo3">{% trans 'Voting not started' %}</h2>
+{% elif not voting.end_date %}
+    <h2 class="titulo3">{% trans 'Voting is opened' %}</h2>
+{% else %}
+
+    <h2 class="titulo2">{% trans 'Resultados: ' %}</h2>
+    <table class="tabla">
+    <tr>
+        <th class="titulo_tabla1">Voto</th>
+        <th class="titulo_tabla2">Número de votos</th>
+    </tr>
+        {% for option in voting.postproc %}
         <tr>
-            <th class="titulo_tabla1">Response</th>
-            <th class="titulo_tabla2">Votes</th>
+        <td class="valor_tabla">{{option.option}}</td>
+        <td class="valor_tabla">{{option.postproc}}</td>
         </tr>
-            {% for option in voting.postproc %}
-            <tr>
-            <td class="valor_tabla">{{option.option}}</td>
-            <td class="valor_tabla">{{option.postproc}}</td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td class="valor_tabla">Total</td>
-                <td class="valor_tabla">{{totalvotes}}</td>
-            </tr>
-        </table>
-        </ul>
+        {% endfor %}
+        <tr>
+            <td class="valor_tabla">Total</td>
+            <td class="valor_tabla">{{totalvotes}}</td>
+        </tr>
+    </table>
+  </div>
+  
+  <div id="analisis" class="tabcontent">
+    <h3>Tokyo</h3>
+    <p>Tokyo is the capital of Japan.</p>
+  </div> 
+  <div id="sobrenosotros" class="tabcontent">
+    <h3>Tokyo</h3>
+    <p>Tokyo is the capital of Japan.</p>
+</div> 
+<div id="contacto" class="tabcontent">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+      </div> 
+
     {% endif %}
+<script>
+
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+      
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+      
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+      
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+      } 
+    </script>
 
 {% endblock %}
+
