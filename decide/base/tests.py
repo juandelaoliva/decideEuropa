@@ -23,14 +23,14 @@ class BaseTestCase(APITestCase):
     def tearDown(self):
         self.client = None
         self.token = None
-
+'''
     def login(self, user='admin', password='qwerty'):
         data = {'username': user, 'password': password}
         response = mods.post('authentication/login', json=data, response=True)
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 200)
         self.token = response.json().get('token')
         self.assertTrue(self.token)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token)
-
+'''
     def logout(self):
         self.client.credentials()
