@@ -124,10 +124,12 @@ se explicarán los procesos, técnicas y herramientas para la gestión del códi
 
 Gestión de la construcción e integración continua
 -
-Se explicarán los procesos, técnicas y herramientas para la gestión de la construcción e integración continua del proyecto. Evite poner información de las herramientas en sí que se pueda encontrar en fuentes bibliográficas o internet. Si es del caso haga referencia a ellas. Céntrese en los aspectos particulares de su proyecto en concreto:
+Para la integración y *build* se usa principalmente Travis CI, un servicio para la automatización de la misma en contenedores.
+Este principalmente divide la tarea de integración en *jobs* que se ejecutan al principio del git clone de un repositorio.
 
-* Proceso de integración continua que usa
-* Herramientas que está usando para dar soporte a ese proceso
+Travis CI sigue una linea de procesos estipulada en el *travis.yml* que incluye la modificación de *local_settings* a *local_settings.travis.py* y cada job se encarga de recorrerlo cada vez que se ejecuta la bajada del repositorio.
+
+También uno puede entrar en la pagina web de Travis CI asociada al proyecto para comprobar si la *build* en cuestión se ha ejecutado bien o no.
 
 Gestión de liberaciones, despliegue y entregas
 -
