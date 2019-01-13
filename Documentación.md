@@ -161,6 +161,7 @@ Mapa de herramientas
 4. Docker almacena en un contenedor todo lo anterior (incluyendo Heroku para su posterior despliegue) y lo ejecuta cuando sea necesario, utilizando django como framework y postgresql y base de datos.
 
 ![Optional Text](../master/MapadeHerramientas02.jpg)
+Figura 1:Mapa Herramientas
 
 
 
@@ -168,17 +169,19 @@ Ejercicio de propuesta de cambio
 -
 Inclusion de css en el subsistema visualizacion
 
-Se comienza mediante la creacion de una issue en git con la tarea asignada, relacionandola a aquellos desarrolladores que esten incluidos en la misma, seleccionando y/o creando aquellos labels que sean necesarios. Se referenciara el proyecto asi como el Milestone asociado.
+Se comienza mediante la creacion de una issue en git con la tarea asignada, relacionandola a aquellos desarrolladores que esten incluidos en la misma, seleccionando y/o creando aquellos labels que sean necesarios como se ve en la figura 2. Se referenciara el proyecto asi como el Milestone asociado.
 Se describira brevemente la tarea a realizar , asi como la relacion a otras issues.
 
 ![Optional Text](../master/Issue.png)
+Figura 2:Issue inicio tarea
 
 Una vez generada la issue pasaremos al desarrollo de la tarea.
 
 Para la implementacion de css en el projecto necesitaremos crear una carpeta static en la carpeta decide/decide/.
-En ella generaremos el documento css common, donde incluiremos los estilos a implementar en las vistas.
+En ella generaremos el documento css common, donde incluiremos los estilos a implementar en las vistas como se aprecia en la figura 3.
 
 ![Optional Text](../master/rama-trabajo.png)
+Figura 3:Ejemplo rama proyecto
 
 Una vez generado el documento necesitamos referenciar la carpeta static en settings.py, facilitando asi posteriores referenciaciones a la misma.
 
@@ -195,9 +198,10 @@ Terminados y comprobados los cambios en el projecto procedemos a subirlos a la r
         git commit -m "Implementacion de css"
         git push origin devManuel
         
- Comprobamos que los cambios se han subido con exito en la rama del desarrollador. Si no hay errores generamos un pull request de la rama master, abriendo con ella una nueva issue pidiendo la revision del codigo por otro desarrolador.
+ Comprobamos que los cambios se han subido con exito en la rama del desarrollador. Si no hay errores generamos un pull request de la rama master, abriendo con ella una nueva issue pidiendo la revision del codigo por otro desarrolador como se aprecia en la figura 4.
 
 ![Optional Text](../master/IssuePush.png)
+Figura 4:Issue commit
 
 Esperando su visto bueno para realizar el merge con la rama master. El merge se realiza mediante los siguientes comandos:
  
