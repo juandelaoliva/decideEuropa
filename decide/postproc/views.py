@@ -26,7 +26,6 @@ class PostProcView(APIView):
         options.sort(key=lambda x: -x['seats'])
         return Response(options)
 
-
     def sainteLague(self, options, seats):
         #Se añade un campo de escaños (seats) a cada una de las opciones
         for opt in options:
@@ -41,6 +40,18 @@ class PostProcView(APIView):
         #Se ordenan las opciones por el número de escaños
         options.sort(key=lambda x: -x['seats'])
         return Response(options)
+
+
+    def multiQuestions(self, questions):
+
+        for question in questions:
+            for option in question:
+                option['postproc'] = option['votes'];
+
+            question.sort(key=lambda x: -x['postproc'])
+
+        
+        return Response(questions)
         
     def equalityVoting(self, options, seats, method):
 
@@ -95,16 +106,19 @@ class PostProcView(APIView):
                 seats = int(float(request.data.get('seats', '8')))
                 return self.equalityVoting(opts, seats, lambda x, y : self.sainteLague(x, y))
 
-        else:
-            if t == 'IDENTITY':
-                return self.identity(opts)
+        elif t == 'IDENTITY':
+            return self.identity(opts)
 
-            elif t == 'DHONDT':
-                seats = int(float(request.data.get('seats', '8')))
-                return self.dhondt(opts,seats)
+        elif t == 'MULTI':
+            questions = request.data.get('questions', [])
+            return self.multiQuestions(questions)
 
-            elif t == 'SAINTELAGUE':
-                seats = int(float(request.data.get('seats', '8')))
-                return self.sainteLague(opts, seats)            
+        elif t == 'DHONDT':
+            seats = int(float(request.data.get('seats', '8')))
+            return self.dhondt(opts,seats)
+
+        elif t == 'SAINTELAGUE':
+            seats = int(float(request.data.get('seats', '8')))
+            return self.sainteLague(opts, seats)            
 
         return Response({})
