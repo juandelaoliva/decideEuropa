@@ -160,6 +160,8 @@ Mapa de herramientas
 -
 se dará un esquema de cómo se conectan las herramientas que se usan en el proyecto, qué relaciones tienen o qué relaciones propondría añadir. No olvide explicar bien el mapa de herramientas. Se trata del mapa de herramientas de gestión de la configuración. El mapa de herramientas que se usen para el desarrollo (como bases de datos u otros) no es necesario que aparezca aquí.
 
+![Optional Text](../master/mapa%20de%20herramientas.jpg)
+
 Ejercicio de propuesta de cambio
 -
 Inclusion de css en el subsistema visualizacion
