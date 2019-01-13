@@ -40,7 +40,25 @@ se presentará la planificación del trabajo y qué tareas se han hecho. Haciend
 
 Entorno de desarrollo
 -
-debe explicar cuál es el entorno de desarrollo que ha usado, cuáles son las versiones usadas y qué pasos hay que seguir para instalar tanto su sistema como los subsistemas relacionados para hacer funcionar el sistema al completo. Si se han usado distintos entornos de desarrollo por parte de distintos miembros del grupo, también debe referenciarlo aquí.
+El equipo de desarrolladores decideEuropa visualizacion ha hecho uso del entorno de desarrollo python, en su version 3.6.0, haciendo uso del framework Django. Para su instalacion, se pone a disposicion del usuario el documento requirements.txt, en el cual se engloban todas las librerias necesarias para el correcto funcionamiento de la aplicacion.
+Para instalar el entorno de desarrollo el usuario debe escribir el siguiente comando en consola:
+    sudo apt-get install python3.6
+Finalizada la instalacion del entorno de desarrollo, se procedera a la instalacion del proyecto asi como el framework DSjango y sus librerias.
+ Para descargar el projecto se hara uso de la herramienta git mediante el comando:
+    git clone https://github.com/juandelaoliva/decideEuropa.git
+Una vez descargado el projecto se procedera a instalar el framework y sus librerias. Para ello navegaremos hasta el directorio del projecto /decideEuropa y ejecutaremos el siguiente comando:
+    pip3 install -r requirements.txt
+Si durante la instalacion de las librerias ocurriese algun error, se procedera a instalar las librerias individualmente. Para ello abriremos requirements.txt y instalaremos las librerias alli descritas mediante el siguiente comando:
+    pip3 install "libreria"
+Tras esto tendremos que crearnos nuestra base de datos con postgres:
+    sudo su - postgres
+    psql -c "create user decide with password 'decide'"
+    psql -c "create database decide owner decide"
+Procederemos a configurar los datos en local_settings.py para nuestras rutas en local. Unavez configuradas las rutas pertinentes realizaremos la primera migracion para preparar la base de datos, ejecutando el siguiente codigo desde la carpeta decide:
+    ./manage.py migrate
+Ya podemos ejecutar nuestro projecto en local:
+    ./manage.py runserver
+
 
 Gestión de incidencias
 -
