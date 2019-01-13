@@ -34,19 +34,35 @@ En el nuevo formato se han añadido una serie de tablas y un grafico de tarta, a
 
 Descripción del sistema
 -
-se explicará el sistema desarrollado desde un punto de vista funcional y arquitectónico. Se hará una descripción tanto funcional como técnica de sus componentes y su relación con el resto de subsistemas. Habrá una sección que enumere explícitamente cuáles son los cambios que se han desarrollado para el proyecto.
+
+El sistema de DecideEuropa se divide en varios subsistemas, entre los que se encuentran el que nuestro grupo está modificando, el de visualización. Éste se encarga unica y exclusivamente de mostrar lo que ha salido a partir de las votaciones que se han iniciado.
 
 El sistema de visualización de DecideEuropa publica en css la información registrada en las votaciones. Para ello necesita la integración del sistema de postprocesado ya que, para que el sistema muestre los votos, han de ser procesados en información visible.
+Esto se muestra en el archivo visualizer.html que pide los parametros que hemos introducido.
 
+También se compone de un bot de Telegram que muestra estas mismas respuestas a petición del usuario.
+Este sistema está preparado para el despliegue y la integración continua gracias a Heroku y Travis respectivamente.
 
 Los cambios que se han aplicado son los siguientes:
-* Se ha implementado el archivo common.css para visualización en dicho lenguaje
-* Se ha añadido un bot de Telegram para mostrar los gráficos creados
+* Se ha implementado el archivo common.css para visualización en dicho lenguaje.
+* Se ha añadido un bot de Telegram para mostrar los gráficos creados.
 * Se ha modificado el archivo visualizer.html desde cero para acoplarlo a las nuevas vistas.
+* Se ha añadido la implementación con Travis y con Heroku, para la integración continua y el despliegue.
 
 Planificación del proyecto
 -
 se presentará la planificación del trabajo y qué tareas se han hecho. Haciendo hincapié en el reparto de tareas. Es importante que estén explícitas las iteraciones funcionales que se han realizado por parte de los miembro del equipo. Tenga muy en cuenta lo expresado en la sección 2.2.2 del enunciado del proyecto en cuánto a división de tareas. Recuerde que también entregará el diario del grupo por lo que no es necesario que aquí detalle lo que va en ese entregable.
+
+
+Manolo - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
+
+Felipe - Generacion del archivo de documentación.md y implementación del sistema de Travis CI
+
+Alfonso - Implementación del bot de Telegram y unificación con decide. Implementación de Heroku. Coordinación con otros grupos. Llenado de la wiki de github.
+
+Elena - Generación del CSS y parte de la documentación.
+
+Juan - Reunión de coordinación de otros subgrupos. Desarrollo inicial de la documentación del submodulo. Creación y administración del repositorio. Adición del subsistema al proyecto padre. 
 
 Entorno de desarrollo
 -
@@ -110,10 +126,11 @@ Gestión de la construcción e integración continua
 -
 Se explicarán los procesos, técnicas y herramientas para la gestión de la construcción e integración continua del proyecto. Evite poner información de las herramientas en sí que se pueda encontrar en fuentes bibliográficas o internet. Si es del caso haga referencia a ellas. Céntrese en los aspectos particulares de su proyecto en concreto:
 
-Proceso de integración continua que usa
--
-Herramientas que está usando para dar soporte a ese proceso
+* Proceso de integración continua que usa
+* Herramientas que está usando para dar soporte a ese proceso
+
 Gestión de liberaciones, despliegue y entregas
+-
 se explicarán los procesos, técnicas y herramientas para la gestión de las liberaciones, despliegue y entregas del proyecto. Evite poner información de las herramientas en sí que se pueda encontrar en fuentes bibliográficas o internet. Si es del caso haga referencia a ellas. Céntrese en los aspectos particulares de su proyecto en concreto:
 
 * Proceso definido para las liberaciones con un apartado explícito de cómo ha elegido la licencia de software para su proyecto
