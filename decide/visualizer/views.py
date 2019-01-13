@@ -14,27 +14,29 @@ def view(request,voting_id):
     carga = True
     totalvotes = 0
     aux = []
-    try: 
+    carga = False
+    try:
         for option in voting[0]["postproc"] :
             aux.append({"label" : ""+option["option"], "value": ""+str(option["votes"])})
             totalvotes = totalvotes + option["votes"]
+
+        dataSource = {"chart": {
+                "caption": "Porcentaje de Votos",
+                "subCaption" : ""+voting[0]["name"]+" Votos",
+                "showValues":"1",
+                "showPercentInTooltip" : "0",
+                "numberPrefix" : "$",
+                "enableMultiSlicing":"1",
+                "theme": "fusion"
+            },
+            "data": aux}
+
+        pie3d = FusionCharts("pie3d", "ex2" , "100%", "400", "chart-1", "json", dataSource)
+        carga = True
     except:
-        carga=False
-        return render(request, 'visualizer/visualizer.html', {'carga':carga})
-
-    dataSource = {"chart": {
-            "caption": "Porcentaje de Votos",
-            "subCaption" : ""+voting[0]["name"]+" Votos",
-            "showValues":"1",
-            "showPercentInTooltip" : "0",
-            "numberPrefix" : "",
-            "enableMultiSlicing":"1",
-            "theme": "fusion"
-        },
-        "data": aux}
-
-    pie3d = FusionCharts("pie3d", "ex2" , "100%", "400", "chart-1", "json", dataSource)
-    
+        print(carga)
+        return render(request, 'visualizer/visualizer.html',
+                  {'carga':carga})
     #Renderizacion de la vista con template 'visualizer/visualizer.html
     #y variable voting
     return render(request, 'visualizer/visualizer.html',
