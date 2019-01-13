@@ -51,18 +51,18 @@ Los cambios que se han aplicado son los siguientes:
 
 Planificación del proyecto
 -
+se presentará la planificación del trabajo y qué tareas se han hecho. Haciendo hincapié en el reparto de tareas. Es importante que estén explícitas las iteraciones funcionales que se han realizado por parte de los miembro del equipo. Tenga muy en cuenta lo expresado en la sección 2.2.2 del enunciado del proyecto en cuánto a división de tareas. Recuerde que también entregará el diario del grupo por lo que no es necesario que aquí detalle lo que va en ese entregable.
 
-Las tareas principales (separadas por componente del submodulo) que se han hecho en el proyecto han sido las siguientes:
 
-* Manolo - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
+Manolo - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
 
-* Felipe - Generacion del archivo de documentación.md y implementación del sistema de Travis CI
+Felipe - Generacion del archivo de documentación.md y implementación del sistema de Travis CI
 
-* Alfonso - Implementación del bot de Telegram y unificación con decide. Implementación de Heroku. Coordinación con otros grupos. Llenado de la wiki de github.
+Alfonso - Implementación del bot de Telegram y unificación con decide. Implementación de Heroku. Coordinación con otros grupos. Llenado de la wiki de github.
 
-* Elena - Generación del CSS y parte de la documentación.
+Elena - Generación del CSS y parte de la documentación.
 
-* Juan - Reunión de coordinación de otros subgrupos. Desarrollo inicial de la documentación del submodulo. Creación y administración del repositorio. Adición del subsistema al proyecto padre. 
+Juan - Reunión de coordinación de otros subgrupos. Desarrollo inicial de la documentación del submodulo. Creación y administración del repositorio. Adición del subsistema al proyecto padre. 
 
 Entorno de desarrollo
 -
@@ -124,12 +124,10 @@ se explicarán los procesos, técnicas y herramientas para la gestión del códi
 
 Gestión de la construcción e integración continua
 -
-Para la integración y *build* se usa principalmente Travis CI, un servicio para la automatización de la misma en contenedores.
-Este principalmente divide la tarea de integración en *jobs* que se ejecutan al principio del git clone de un repositorio.
+Se explicarán los procesos, técnicas y herramientas para la gestión de la construcción e integración continua del proyecto. Evite poner información de las herramientas en sí que se pueda encontrar en fuentes bibliográficas o internet. Si es del caso haga referencia a ellas. Céntrese en los aspectos particulares de su proyecto en concreto:
 
-Travis CI sigue una linea de procesos estipulada en el *travis.yml* que incluye la modificación de *local_settings* a *local_settings.travis.py* y cada job se encarga de recorrerlo cada vez que se ejecuta la bajada del repositorio.
-
-También uno puede entrar en la pagina web de Travis CI asociada al proyecto para comprobar si la *build* en cuestión se ha ejecutado bien o no.
+* Proceso de integración continua que usa
+* Herramientas que está usando para dar soporte a ese proceso
 
 Gestión de liberaciones, despliegue y entregas
 -
@@ -146,10 +144,47 @@ se dará un esquema de cómo se conectan las herramientas que se usan en el proy
 
 Ejercicio de propuesta de cambio
 -
-se presentará un ejercicio con una propuesta concreta de cambio en la que a partir de un cambio que se requiera, se expliquen paso por paso (incluyendo comandos y uso de herramientas) lo que hay que hacer para realizar dicho cambio. Debe ser un ejercicio ilustrativo de todo el proceso de evolución y gestión de la configuración del proyecto.
+Inclusion de css en el subsistema visualizacion
+
+Se comienza mediante la creacion de una issue en git con la tarea asignada, relacionandola a aquellos desarrolladores que esten incluidos en la misma, seleccionando y/o creando aquellos labels que sean necesarios. Se referenciara el proyecto asi como el Milestone asociado.
+Se describira brevemente la tarea a realizar , asi como la relacion a otras issues.
+
+Una vez generada la issue pasaremos al desarrollo de la tarea.
+
+Para la implementacion de css en el projecto necesitaremos crear una carpeta static en la carpeta decide/decide/.
+En ella generaremos el documento css common, donde incluiremos los estilos a implementar en las vistas.
+
+Una vez generado el documento necesitamos referenciar la carpeta static en settings.py, facilitando asi posteriores referenciaciones a la misma.
+
+Una vez referenciadas procedemos a realizar los cambios en la vista base.html, haciendo participes asi a todas las vistas de la carpeta static/css/ ya que todas las vistas heredan de ella.
+
+Finalmente realizamos los cambios en la vista, referenciando las diferentes clases en los tags.
+
+Terminados y comprobados los cambios en el projecto procedemos a subirlos a la rama de desarrollo del usuario mediante los siguientes comandos:
+
+        git checkout devManuel
+        git add decide
+        git add visualizacion
+        git add base
+        git commit -m "Implementacion de css"
+        git push origin devManuel
+        
+ Comprobamos que los cambios se han subido con exito en la rama del desarrollador. Si no hay errores generamos un pull request de la rama master, abriendo con ella una nueva issue pidiendo la revision del codigo por otro desarrolador, esperando su visto bueno para realizar el merge con la rama master. El merge se realiza mediante los siguientes comandos:
+ 
+        git checkout master
+        git merge origin devManuel
+        
+Si existen conflictos se procedera a la solucion de los mismo mediante su entorno de desarrollo (Visual Studio). Una vez solucionados se procede a la subida a master:
+
+        git add decide
+        git add visualizacion
+        git add base
+        git commit -m "Implementacion de css"
+        git push
+        
+ Una vez comprobada la subida con exito se procede a cerrar la issue de subida.
+        
 
 Conclusiones y trabajo futuro
 -
-Para mejorar la entrega sería considerable implementar un sistema de selección de gráficos, de manera que sólo se visualice el gráfico deseado haciendo más cómodo su uso.
-Además hacer uso de slack como herramienta de comunicación ya que es un sistema de comunicación en auge.
-Finalmente se ha planteado hacer que el bot de visualización de votos funcione de manera aislada y hacer uso de datos reales recibidos por parte de postproducción.
+se enunciarán algunas conclusiones y se presentará un apartado sobre las mejoras que se proponen para el futuro (curso siguiente) y que no han sido desarrolladas en el sistema que se entrega
