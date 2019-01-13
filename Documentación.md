@@ -51,18 +51,18 @@ Los cambios que se han aplicado son los siguientes:
 
 Planificación del proyecto
 -
-se presentará la planificación del trabajo y qué tareas se han hecho. Haciendo hincapié en el reparto de tareas. Es importante que estén explícitas las iteraciones funcionales que se han realizado por parte de los miembro del equipo. Tenga muy en cuenta lo expresado en la sección 2.2.2 del enunciado del proyecto en cuánto a división de tareas. Recuerde que también entregará el diario del grupo por lo que no es necesario que aquí detalle lo que va en ese entregable.
 
+Las tareas principales (separadas por componente del submodulo) que se han hecho en el proyecto han sido las siguientes:
 
-Manolo - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
+* Manolo - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
 
-Felipe - Generacion del archivo de documentación.md y implementación del sistema de Travis CI
+* Felipe - Generacion del archivo de documentación.md y implementación del sistema de Travis CI
 
-Alfonso - Implementación del bot de Telegram y unificación con decide. Implementación de Heroku. Coordinación con otros grupos. Llenado de la wiki de github.
+* Alfonso - Implementación del bot de Telegram y unificación con decide. Implementación de Heroku. Coordinación con otros grupos. Llenado de la wiki de github.
 
-Elena - Generación del CSS y parte de la documentación.
+* Elena - Generación del CSS y parte de la documentación.
 
-Juan - Reunión de coordinación de otros subgrupos. Desarrollo inicial de la documentación del submodulo. Creación y administración del repositorio. Adición del subsistema al proyecto padre. 
+* Juan - Reunión de coordinación de otros subgrupos. Desarrollo inicial de la documentación del submodulo. Creación y administración del repositorio. Adición del subsistema al proyecto padre. 
 
 Entorno de desarrollo
 -
