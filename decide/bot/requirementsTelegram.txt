@@ -8,12 +8,12 @@ django-filter==1.1.0
 psycopg2==2.7.4
 django-rest-swagger==2.2.0
 
-numpy == 1.15.4
-matplotlib == 3.0.2
+future>=0.16.0
+certifi
+tornado>=5.1
+cryptography
 
 django-heroku
 gunicorn
 
 python-telegram-bot
-Pillow >= 5.2.0
-image==1.5.27
