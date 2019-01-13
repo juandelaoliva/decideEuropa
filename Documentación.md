@@ -155,9 +155,14 @@ Ejemplo: version 1.1.0 /2019 beta
 
 Mapa de herramientas
 -
-se dará un esquema de cómo se conectan las herramientas que se usan en el proyecto, qué relaciones tienen o qué relaciones propondría añadir. No olvide explicar bien el mapa de herramientas. Se trata del mapa de herramientas de gestión de la configuración. El mapa de herramientas que se usen para el desarrollo (como bases de datos u otros) no es necesario que aparezca aquí.
+1. La máquina virtual que carga Ubuntu utiliza la tecnología de git.
+2. Cuando se utiliza clone en GitHub, el script de Travis se ejecuta.
+3. El repositorio se despliega en Heroku.
+4. Docker almacena en un contenedor todo lo anterior (incluyendo Heroku para su posterior despliegue) y lo ejecuta cuando sea necesario, utilizando django como framework y postgresql y base de datos.
 
 ![Optional Text](../master/MapadeHerramientas02.jpg)
+
+
 
 Ejercicio de propuesta de cambio
 -
