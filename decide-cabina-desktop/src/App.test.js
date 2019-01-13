@@ -7,7 +7,7 @@ import { expect } from "chai";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import { shallow } from "enzyme";
 
@@ -21,7 +21,7 @@ it("Renderiza la aplicación completa sin problemas", () => {
 it("Renderiza la vista de listado de votaciones", () => {
   const div = document.createElement("div");
 
-  ReactDOM.render(<Home />, div);
+  ReactDOM.render(<Router><Home /></Router>, div);
 });
 
 it("Debe haber un listado de votaciones con una votación", async () => {
@@ -104,19 +104,22 @@ it("Escribir en el formulario para iniciar sesión", () => {
   expect(wrapper.state("loginForm")["password"]).to.equal("adminadmin");
 });
 
-describe("Peticiones a la API de Decide", () => {
-  it("Devolver listado de votaciones", async () => {
-    let votings = await getVotings();
-    expect(typeof votings).to.equal(typeof []);
-  });
+it("Devolver listado de votaciones", async () => {
+  let votings = await getVotings();
+  expect(typeof votings).to.equal(typeof []);
+});
 
-  it("Iniciar sesión con la API", async () => {
-    let auth = await login({username: 'root', password:'adminadmin'});
-    expect(Object.keys(auth)).to.equal(['token', 'id']);
-  });
+it("Iniciar sesión con la API", async () => {
+  let auth = await login({ username: "root", password: "decide-europa" });
+  expect(auth.id).to.equal(1);
+});
 
-  it("Iniciar sesión con la API con malas credenciales", async () => {
-    let auth = await login({username: 'adsf', password:'asdf'});
-    expect(JSON.stringify(auth)).to.equal(JSON.stringify({}));
-  });
+it("Iniciar sesión con la API con malas credenciales", async () => {
+  try {
+    let auth = await login({ username: "adsf", password: "asdf" });
+  } catch (err) {
+    expect(err.non_field_errors[0]).to.equal(
+      "Unable to log in with provided credentials."
+    );
+  }
 });

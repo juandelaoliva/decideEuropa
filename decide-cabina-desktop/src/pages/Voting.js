@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Login from "./Login";
 import Header from "../components/Header";
 
-import { vote } from "../services/DecideAPI";
+import { vote, getVotingDetails } from "../services/DecideAPI";
 
 export default class Voting extends React.Component {
   constructor(props) {
@@ -30,10 +30,15 @@ export default class Voting extends React.Component {
     if (this.state.answer == null) {
       this.setState({ ...this.state, err: "Debe seleccionar una respuesta" });
     } else {
-      var { ElGamal, BigInt } = window; ElGamal.BITS = 256; 
-      let { pub_key } = this.state.voting; 
-      var bigpk = { p: BigInt.fromJSONObject(`${pub_key.p}`), g: BigInt.fromJSONObject(`${pub_key.g}`), y: BigInt.fromJSONObject(`${pub_key.y}`) }; 
-      var bigmsg = BigInt.fromJSONObject(this.state.answer); 
+      var { ElGamal, BigInt } = window;
+      ElGamal.BITS = 256;
+      let { pub_key } = this.state.voting;
+      var bigpk = {
+        p: BigInt.fromJSONObject(`${pub_key.p}`),
+        g: BigInt.fromJSONObject(`${pub_key.g}`),
+        y: BigInt.fromJSONObject(`${pub_key.y}`)
+      };
+      var bigmsg = BigInt.fromJSONObject(this.state.answer);
       var cipher = ElGamal.encrypt(bigpk, bigmsg);
       vote(this.state.userAuth, this.state.votingId, cipher)
         .then(_ => this.props.history.push("/"))
@@ -53,12 +58,9 @@ export default class Voting extends React.Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.userAuth === null && this.state.userAuth !== null) {
-      fetch(
-        "https://decide-europa-cabina.herokuapp.com/voting/?id=" +
-          this.state.votingId
-      )
-        .then(res => res.json())
-        .then(data => this.setState({ ...this.state, voting: data[0] }));
+      getVotingDetails(this.state.votingId).then(data => {
+        this.setState({ ...this.state, voting: data[0] })
+      })
     }
   }
 
