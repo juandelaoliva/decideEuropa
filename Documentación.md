@@ -128,7 +128,7 @@ El código fuente se ha gestionado mediante la herramienta [GitHub](https://gith
 1. Cada componente del grupo se creará una rama de desarrollo hija de la rama master. Ej: devJohn
 2. Una vez decidido el cambio a implementar se creará una issue mencionando la mejora o cambio que se va a desarrollar para que el resto del grupo lo pueda ver y no haya solapamiento de trabajos. Dicha issue deberá llevar la/s correspondiente/s etiquetas según la [guía de etiquetas](https://github.com/juandelaoliva/decideEuropa/wiki/Guia-de-uso-de-las-etiquetas) acordadas previamente y reflejadas en la [wiki](https://github.com/juandelaoliva/decideEuropa/wiki) del proyecto. Ejemplo: [Creación de Bot informativo en la plataforma de mensajería telegram](https://github.com/juandelaoliva/decideEuropa/issues/10)
 3. En caso de tener algún problema a la hora de implemntear los cambios en nuestra rama de desarrollo podemos comentarlo en la anterior issue (paso 2) o se creará una nueva issue (si el problema es de mayor magnitud) relacionada con la issue anteriormente mencionada la cual indica la tarea que estamos realizando. En la issue del problema se comentará y se pueden asignar a compañeros a los que les solicitamos ayuda. Deberán llevar las correspondientes etiquetas según el documento de la wiki.
-4. Una vez finalizada la tarea o cambio propuesto en nuestra rama se hará un merge de la rama master a nuestra rama para no machacar posibles cambios que se hayan subido anteriormente y se creará una issue de aviso y petición de comprobación. Irá con sus respectivas etiquetas y tendrá que estar relacionada con la issue principal de la tarea (paso 2). En el título y la descripción debe quedar claro dónde se puede encontrar la implementación para que uno de los compañeros compruebe que no da ningún error. Se dará el visto bueno mediante un comentario. Ejemplo:[Petición de subida Bot de telegram](https://github.com/juandelaoliva/decideEuropa/issues/35)
+4. Una vez finalizada la tarea o cambio propuesto en nuestra rama se hará un merge de la rama master a nuestra rama para no machacar posibles cambios que se hayan subido anteriormente y se creará una issue de aviso y petición de comprobación. Irá con sus respectivas etiquetas y tendrá que estar relacionada con la issue principal de la tarea (paso 2). En el título y la descripción debe quedar claro dónde se puede encontrar la implementación para que uno de los compañeros compruebe que no da ningún error. Se dará el visto bueno mediante un comentario. Ejemplo[Petición de subida Bot de telegram](https://github.com/juandelaoliva/decideEuropa/issues/35)
 5. Ya habiendo recibido la confirmación de algún componente del grupo de que nuestro cambio o mejora no da ningun error cerraremos la issue de petición (paso 4) y se hacce un commit a la rama master.
 6.Se cerrará la issue que indicaba la tarea a realizar (paso 2).
 
@@ -146,11 +146,11 @@ Gestión de liberaciones, despliegue y entregas
 se explicarán los procesos, técnicas y herramientas para la gestión de las liberaciones, despliegue y entregas del proyecto. Evite poner información de las herramientas en sí que se pueda encontrar en fuentes bibliográficas o internet. Si es del caso haga referencia a ellas. Céntrese en los aspectos particulares de su proyecto en concreto:
 
 * Proceso definido para las liberaciones con un apartado explícito de cómo ha elegido la licencia de software para su proyecto
-* Proceso definido para el despliegue
-* Proceso definido para las entregas
-* Política de nombrado e identificación de los entregables
+El despliegue se realiza mediante heroku, usando la cuenta proporcionada por el coordinador del grupo, a traves de la rama master.
 
-En cuanto al nombrado de los entregables, se usa la política de nombrado de versiones facilitando primeramente el numero de version, seguido de una barra y el año de la versión.
+Las entregas se realizaran mediante la creacion de una imagen contenedor de docker,
+
+En cuanto al nombrado de los entregables, se usa una política de nombrado de versiones compuesto el numero de version, indicado el primer numero las version, seguido de los cambios realizados segun su tamaño, seguido de una barra y el año de la versión.
 
 Finalmente se añadiría el nombre de la versión, en el caso de que la entrega no sea final, la versión tendrá como nombre "beta".
 
