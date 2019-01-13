@@ -1,8 +1,16 @@
-const API_URL = "http://decide-europa.herokuapp.com";
+const API_URL = "https://decide-europa.herokuapp.com";
+
+if (fetch === undefined) {
+  var fetch = require("isomorphic-fetch");
+}
 
 async function getVotings() {
   return await fetch(API_URL + "/voting", {
-    method: "GET"
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Origin: "http://localhost:3000"
+    }
   }).then(res => res.json());
 }
 
@@ -10,9 +18,11 @@ function login(loginForm) {
   return new Promise((resolve, reject) => {
     fetch(API_URL + "/authentication/login/", {
       method: "POST",
+      mode: "cors",
       body: JSON.stringify(loginForm),
       headers: {
-        "Content-type": "application/json"
+        "Content-type": "application/json",
+        Origin: "http://localhost:3000"
       }
     })
       .then(res => res.json())
@@ -24,9 +34,11 @@ function login(loginForm) {
 
           fetch(API_URL + "/authentication/getuser/", {
             method: "POST",
+            mode: "cors",
             body: JSON.stringify(auth),
             headers: {
-              "Content-type": "application/json"
+              "Content-type": "application/json",
+              Origin: "http://localhost:3000"
             }
           })
             .then(res => res.json())
@@ -45,6 +57,7 @@ function vote(auth, votingId, cipher) {
   return new Promise((resolve, reject) => {
     fetch(API_URL + "/store/", {
       method: "POST",
+      mode: "cors",
       body: JSON.stringify({
         vote: { a: cipher.alpha.toString(), b: cipher.beta.toString() },
         voting: votingId,
@@ -53,7 +66,8 @@ function vote(auth, votingId, cipher) {
       }),
       headers: {
         "Content-type": "application/json",
-        Authorization: "Token " + auth.token
+        Authorization: "Token " + auth.token,
+        Origin: "http://localhost:3000"
       }
     })
       .then(async res => {
@@ -67,4 +81,19 @@ function vote(auth, votingId, cipher) {
   });
 }
 
-export { getVotings, login, vote };
+function getVotingDetails(votingId) {
+  return new Promise((resolve, reject) => {
+    fetch(API_URL + "/voting/?id=" + votingId, {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+      Origin: "http://localhost:3000"
+    }
+  })
+    .then(res => res.json())
+    .then(data => resolve(data))
+    .catch(err => reject(err));
+  })
+}
+
+export { getVotings, login, vote, getVotingDetails };
