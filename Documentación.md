@@ -103,11 +103,17 @@ Ya podemos ejecutar nuestro projecto en local:
 
 Gestión de incidencias
 -
-se describirá el proceso de gestión de incidencias que ha seguido en el proyecto. También deberá enlazar partes de su proyectos donde se evidencie que ha seguido ese proceso.
+La gestión de incidencias que hemos utilizado en Decide-Europa-Visualización Ha estado estrechamente relacionado con la utilización de issues con las correspondientes labels, al detectar un posible fallo o error en el correspondiente commit se procederá a comentar en la issue el fallo si lo conoce, además se creará una issue con  una etiqueta  de Bug y de High priority, para facilitar la identificación de los fallos por parte de los demás miembros del grupo.Será responsabilidad del commit que ha generado el error subsanarlo ,no obstante si otro miembro detecta el error y sabe subsanarlo podrá proceder solicitando luego un commit para subir los cambios
+Ejemplo realización gestión de la incidencia:
 
-La gestión de incidencias debería contener explícitamente dos apartados. Uno de cómo se han gestionado la incidencias internas y otro el cómo se han gestionado y se ofrece protocolo para gestionar las incidencias externas tanto las recibidas como las que se reporten a otros subsistemas.
+[Gestión de incidencias](https://github.com/juandelaoliva/decideEuropa/wiki/Ejemplo-de-gesti%C3%B3n-de-incidencias)
 
-Cuando una incidencia esté relacionada con un commit, señalar el commit dentro de la propia incidencia y viceversa.
+La gestión de incidencias con otros grupos ha seguido una metodología similar a la de nuestro subgrupo (Visualización)
+Si se producen conflictos con los merges se tendrá que abrir una discusión en los comentarios de la issue determinada.
+Toda la información detallada de la gestión con los demás subsistemas vendrá explicada en: 
+
+[Documento Gestión Decide Europa](https://github.com/decide-europa/decide-europa/wiki/Documento-Gesti%C3%B3n-Decide-Europa)
+
 
 Gestión de depuración
 -
