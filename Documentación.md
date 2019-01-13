@@ -139,6 +139,12 @@ se explicarán los procesos, técnicas y herramientas para la gestión de las li
 * Proceso definido para las entregas
 * Política de nombrado e identificación de los entregables
 
+En cuanto al nombrado de los entregables, se usa la política de nombrado de versiones facilitando primeramente el numero de version, seguido de una barra y el año de la versión.
+
+Finalmente se añadiría el nombre de la versión, en el caso de que la entrega no sea final, la versión tendrá como nombre "beta".
+
+Ejemplo: version 1.1.0 /2019 beta
+
 Mapa de herramientas
 -
 se dará un esquema de cómo se conectan las herramientas que se usan en el proyecto, qué relaciones tienen o qué relaciones propondría añadir. No olvide explicar bien el mapa de herramientas. Se trata del mapa de herramientas de gestión de la configuración. El mapa de herramientas que se usen para el desarrollo (como bases de datos u otros) no es necesario que aparezca aquí.
@@ -189,5 +195,7 @@ Si existen conflictos se procedera a la solucion de los mismo mediante su entorn
 Conclusiones y trabajo futuro
 -
 Para mejorar la entrega sería considerable implementar un sistema de selección de gráficos, de manera que sólo se visualice el gráfico deseado haciendo más cómodo su uso.
+
 Además hacer uso de slack como herramienta de comunicación ya que es un sistema de comunicación en auge.
+
 Finalmente se ha planteado hacer que el bot de visualización de votos funcione de manera aislada y hacer uso de datos reales recibidos por parte de postproducción ya que actualmente los datos usados han sido creados por nosotros, al ser imposible usar los de otros equipos.
