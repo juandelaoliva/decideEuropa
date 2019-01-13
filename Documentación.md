@@ -148,4 +148,6 @@ se presentará un ejercicio con una propuesta concreta de cambio en la que a par
 
 Conclusiones y trabajo futuro
 -
-se enunciarán algunas conclusiones y se presentará un apartado sobre las mejoras que se proponen para el futuro (curso siguiente) y que no han sido desarrolladas en el sistema que se entrega
+Para mejorar la entrega sería considerable implementar un sistema de selección de gráficos, de manera que sólo se visualice el gráfico deseado haciendo más cómodo su uso.
+Además hacer uso de slack como herramienta de comunicación ya que es un sistema de comunicación en auge.
+Finalmente se ha planteado hacer que el bot de visualización de votos funcione de manera aislada y hacer uso de datos reales recibidos por parte de postproducción.
