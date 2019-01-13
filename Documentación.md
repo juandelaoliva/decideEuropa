@@ -54,7 +54,7 @@ Planificación del proyecto
 se presentará la planificación del trabajo y qué tareas se han hecho. Haciendo hincapié en el reparto de tareas. Es importante que estén explícitas las iteraciones funcionales que se han realizado por parte de los miembro del equipo. Tenga muy en cuenta lo expresado en la sección 2.2.2 del enunciado del proyecto en cuánto a división de tareas. Recuerde que también entregará el diario del grupo por lo que no es necesario que aquí detalle lo que va en ese entregable.
 
 
-Manolo - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
+Manuel - Controlador, librería de visualización y compresor, creación de carpetas de css y vista basica. Gestión de errores 404, creación de votaciones
 
 Felipe - Generacion del archivo de documentación.md y implementación del sistema de Travis CI
 
@@ -117,9 +117,16 @@ Toda la información detallada de la gestión con los demás subsistemas vendrá
 
 Gestión de depuración
 -
-se describirá el proceso de gestión de depuración que ha seguido en el proyecto. También deberá enlazar partes de su proyectos donde se evidencie que ha seguido ese proceso.
+La gestión de la depuración de código se llevará a cabo junto a las correspondientes issues y labels para facilitar la identificación, si se encontrase un error y no se supiese subsanar, primero se procedería a comentar en la propia issue el error por si algún miembro puede ayudarle, después de esto:
 
-En este apartado sería ideal que pudiera tener un ejemplo de una incidencia que haya gestionado y que haya dado lugar a un proceso de depuración y cómo, usando el proceso definido, pudo solventarla.
+o se solicita ayuda a otros miembros ya que no eres capaz y otro equipo se encarga del proceso de arreglo
+
+o bien se detecta el error y se procede a eliminar este del ultimo commit para arreglar el fallo, mediante su correspondiente creación de la issue y su validación para el commit,cuando se elimina o cambia código por errores en la issue del commit se debe comprobar por otro miembro que bien el error esta subsanado y que el resto del proyecto funciona correctamente como en las peticiones del commit,una vez validado se procede a la subida
+
+Un ejemplo de la depuración de código puede verse en el siguiente enlace:
+
+[Ejemplo de depuración de código](https://drive.google.com/drive/folders/1f352Y3U_zUzATCNZ_h9PrJf5DQOxsfli)
+
 
 Gestión del código fuente
 -
