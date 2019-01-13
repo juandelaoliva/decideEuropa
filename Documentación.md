@@ -143,15 +143,12 @@ También uno puede entrar en la pagina web de Travis CI asociada al proyecto par
 
 Gestión de liberaciones, despliegue y entregas
 -
-se explicarán los procesos, técnicas y herramientas para la gestión de las liberaciones, despliegue y entregas del proyecto. Evite poner información de las herramientas en sí que se pueda encontrar en fuentes bibliográficas o internet. Si es del caso haga referencia a ellas. Céntrese en los aspectos particulares de su proyecto en concreto:
+El software utilizado ha sido en algunos casos gratuito y open-source y en el resto de casos con la licencia que nos ha otorgado la Universidad de Sevilla para trabajar con ello.
 
-* Proceso definido para las liberaciones con un apartado explícito de cómo ha elegido la licencia de software para su proyecto
 El despliegue se realiza mediante heroku, usando la cuenta proporcionada por el coordinador del grupo, a traves de la rama master.
-
-Las entregas se realizaran mediante la creacion de una imagen contenedor de docker,
+Las entregas se realizara colocando la URL en el formulario estipulado en la Wiki de EGC
 
 En cuanto al nombrado de los entregables, se usa una política de nombrado de versiones compuesto el numero de version, indicado el primer numero las version, seguido de los cambios realizados segun su tamaño, seguido de una barra y el año de la versión.
-
 Finalmente se añadiría el nombre de la versión, en el caso de que la entrega no sea final, la versión tendrá como nombre "beta".
 
 Ejemplo: version 1.1.0 /2019 beta
