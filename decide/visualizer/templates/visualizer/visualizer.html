@@ -40,31 +40,45 @@
             <th class="titulo_tabla1">Voto</th>
             <th class="titulo_tabla2">Número de votos</th>
         </tr>
-            {% for option in voting.postproc %}
-            <tr>
-            <td class="valor_tabla">{{option.option}}</td>
-            <td class="valor_tabla">{{option.postproc}}</td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <td class="valor_tabla">Total</td>
-                <td class="valor_tabla">{{totalvotes}}</td>
-            </tr>
-        </table>
-    </div>
-    
-    <div id="analisis" class="tabcontent">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
-    </div> 
-    <div id="sobrenosotros" class="tabcontent">
-        <h3>Tokyo</h3>
-        <p>Tokyo is the capital of Japan.</p>
-    </div> 
-    <div id="contacto" class="tabcontent">
-            <h3>Tokyo</h3>
-            <p>Tokyo is the capital of Japan.</p>
-        </div> 
+
+        {% for option in voting.postproc %}
+        <tr>
+        <td class="valor_tabla">{{option.option}}</td>
+        <td class="valor_tabla">{{option.postproc}}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="valor_tabla">Total</td>
+            <td class="valor_tabla">{{totalvotes}}</td>
+        </tr>
+    </table>
+</div>
+
+  
+  <div id="analisis" class="tabcontent">
+    <h3>Análisis</h3>
+    <p>A continuación se van a mostrar los datos obtenidos de las votaciones mediante gráficas de 360 grados, estas gráficas se utilizan en aquellos casos donde interesa no solamente mostrar el número de veces que se dan una característica o atributo de manera tabular sino más bien de manera gráfica, de tal manera que se pueda visualizar mejor la proporción en que aparece esa característica respecto del total, por lo que es idóneo para mostrar de manera concisa a la vez que sencilla los resultados de una votación.</p>
+  </div> 
+  <div id="sobrenosotros" class="tabcontent">
+    <h3>Sobre nosotros</h3>
+    <p>Este proyecto ha sido realizado con mucho amor y cariño por un grupo de estudiantes de Ingeniería del Software de la Universidad de Sevilla para la asignatura de Evolución y Gestión de la Configuración. Se ha realizado sobre un proyecto base de votación cedido por la empresa Wadobo, de la cual alguno de sus componentes son antiguos estudiantes de la misma facultad.
+        Wadobo una pequeña empresa de desarrollo software. Son expertos en tecnologías software libre y en desarrollo. Su objetivo no es tener grandes márgenes de beneficio, sino desarrollar software, para hacer la vida de los usuarios más fácil haciendo lo que más les gusta hacer.
+        Somos un grupo de desarrolladores que aman el software libre y aplican el saber hacer del desarrollo de software libre a nuestro trabajo.
+        </p>
+</div> 
+<div id="contacto" class="tabcontent">
+        <h3>Contacto</h3>
+        <p>Para encontrarnos puede escribirnos a cualquiera de los componentes del grupo de visualización del proyecto Decide-Europa:</br>
+            -	Alfonso Alarcón: alfalatam@alum.us.es</br>
+            -	Manuel Barbadillo: manbarser@alum.us.es</br>
+            -	Juan de la Oliva: juaoliagu@alum.us.es</br>
+            -	Felipe Trinidad: feltrimar@alum.us.es</br>
+            -	Elena Molina: elemolpin@alum.us.es</br>
+            En caso de querer contactar directamente con la empresa Wadobo puede acceder a su página de contacto, https://www.wadobo.com/contact/ o directamente mandarles un email a la siguiente dirección de correo electrónico: info@wadobo.com</br>
+            </p>
+      </div> 
+
+ 
 
         {% endif %}
     <script>
