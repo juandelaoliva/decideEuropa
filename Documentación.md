@@ -21,11 +21,14 @@ Enlaces de interés:
 
 Resumen
 -
-Se sintetizará de un vistazo lo hecho en el trabajo y los datos fundamentales. Se usarán palabras para resumir el proyecto presentado. Un buen resumen contendrá el problema que se ha tratado, por qué es un problema importante, la solución que se ha planteado, por qué es una buena solución y algunas conclusiones del trabajo. No suele exceder los 600 caracteres.
+Se ha procedido a la actualización del módulo visualizer en el proyecto DecideEuropa. Para la actualización se ha implementado tecnologías como Travis y Heroku, así como librerías como Mathplotlib, numpy y Fusioncharts. Como entorno de desarrollo hemos utilizado de nuevo Django para trabajar sobre el codigo que nos entregaron.
+Los problemas a tratar eran una mejora de la muestra de la votación, la cual era en su anterior iteración era una id de la votación junto con el título de la misma. En nuestra nueva iteración hemos añadido tablas y un grafico de tarta así como información de contacto y descripción del mismo proyecto.
 
 Introducción y contexto
 -
 Se pondrá en contexto el proyecto elegido y los aspectos fundamentales para entender el resto del documento. La introducción es como un resumen ampliado.
+
+
 
 Descripción del sistema
 -
