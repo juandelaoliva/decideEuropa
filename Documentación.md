@@ -169,6 +169,8 @@ Inclusion de css en el subsistema visualizacion
 Se comienza mediante la creacion de una issue en git con la tarea asignada, relacionandola a aquellos desarrolladores que esten incluidos en la misma, seleccionando y/o creando aquellos labels que sean necesarios. Se referenciara el proyecto asi como el Milestone asociado.
 Se describira brevemente la tarea a realizar , asi como la relacion a otras issues.
 
+![Optional Text](../master/Issue.png)
+
 Una vez generada la issue pasaremos al desarrollo de la tarea.
 
 Para la implementacion de css en el projecto necesitaremos crear una carpeta static en la carpeta decide/decide/.
