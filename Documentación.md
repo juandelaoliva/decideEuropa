@@ -17,7 +17,7 @@ Miembros del grupo (en orden alfabético):
 Enlaces de interés:
 --------
 * [Repositorio de código](https://github.com/juandelaoliva/decideEuropa)
-* [Sistema desplegado]
+* [Sistema desplegado](https://decidevisualizacion.herokuapp.com/doc/)
 
 Resumen
 -
@@ -35,6 +35,14 @@ En el nuevo formato se han añadido una serie de tablas y un grafico de tarta, a
 Descripción del sistema
 -
 se explicará el sistema desarrollado desde un punto de vista funcional y arquitectónico. Se hará una descripción tanto funcional como técnica de sus componentes y su relación con el resto de subsistemas. Habrá una sección que enumere explícitamente cuáles son los cambios que se han desarrollado para el proyecto.
+
+El sistema de visualización de DecideEuropa publica en css la información registrada en las votaciones. Para ello necesita la integración del sistema de postprocesado ya que, para que el sistema muestre los votos, han de ser procesados en información visible.
+
+
+Los cambios que se han aplicado son los siguientes:
+* Se ha implementado el archivo common.css para visualización en dicho lenguaje
+* Se ha añadido un bot de Telegram para mostrar los gráficos creados
+* Se ha modificado el archivo visualizer.html desde cero para acoplarlo a las nuevas vistas.
 
 Planificación del proyecto
 -
