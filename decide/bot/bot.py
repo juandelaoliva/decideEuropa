@@ -25,7 +25,7 @@ def vivo(bot, update):
 def web(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text='La plataforma de despliege que he utilizado es Heroku')
     bot.sendPhoto(chat_id=update.message.chat_id, photo=open('heroku.png', 'rb'))
-    bot.sendMessage(chat_id=update.message.chat_id, text='Buenas, aquí tiene la página:'+'\n'+' https://decide-heroku-ubuntu.herokuapp.com/doc/')
+    bot.sendMessage(chat_id=update.message.chat_id, text='Buenas, aquí tiene la página:'+'\n'+' https://decidevisualizacion.herokuapp.com/doc/')
 
 def votaciones(bot, update):
         bot.sendMessage(chat_id=update.message.chat_id, text='Las votaciones en las que aun puedes particicpar son las siguientes:')
