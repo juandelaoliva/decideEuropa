@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.http import Http404
+from voting.models import Voting
+from django.shortcuts import render, redirect
 
 from base import mods
 
@@ -38,3 +40,10 @@ class BoothView(TemplateView):
             result= date_time.strftime('%d/%m/%Y a las %H:%M:%S')
         
         return result
+
+def votings(request):
+    votings = Voting.objects.exclude(end_date__isnull = False)
+    
+    return render(request, 'booth/votings.html', {'votings': votings})
+        
+    
