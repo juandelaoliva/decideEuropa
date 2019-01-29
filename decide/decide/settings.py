@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'corsheaders',
     'django_filters',
     'rest_framework',
@@ -71,7 +73,9 @@ MODULES = [
     'voting',
 ]
 
-BASEURL = 'http://localhost:8000'
+
+BASEURL = 'https://decide-europa.herokuapp.com'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -85,16 +89,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'decide.urls'
 
-AUTH_TEMPLATE_PATH = os.path.join(BASE_DIR, 'authentication')
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-		AUTH_TEMPLATE_PATH ,
-        os.path.join(BASE_DIR, 'templates')
-	],
-
+		    AUTH_TEMPLATE_PATH ,
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,8 +122,6 @@ AXES_CACHE_LIMIT = 4
 AXES_COOLOFF_TIME = 0.005
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-
 WSGI_APPLICATION = 'decide.wsgi.application'
 
 
@@ -177,7 +176,6 @@ STATIC_URL = '/static/'
 
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
-APIS = {}
 
 try:
     from local_settings import *
@@ -185,23 +183,16 @@ except ImportError:
     print("local_settings.py not found")
 
 
+INSTALLED_APPS = INSTALLED_APPS + MODULES
+
+APIS = {}
+
 import django_heroku
 django_heroku.settings(locals())
 
 INSTALLED_APPS = INSTALLED_APPS + MODULES
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
-
-# import django_heroku
-# django_heroku.settings(locals())
-
-# Try to import django-heroku depending on Travis or Heroku
-try:
-    # Configure Django App for Heroku.
-    import django_heroku
-    django_heroku.settings(locals())
-except ImportError:
-    found = False
 
 from decide.leerFichero import ficheroCorreoContrasena
 
