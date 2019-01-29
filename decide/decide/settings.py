@@ -38,12 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'corsheaders',
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
+    'bootstrap4',
+    'axes',
 ]
 
 REST_FRAMEWORK = {
@@ -55,6 +56,8 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = [
     'base.backends.AuthBackend',
+    'axes.backends.AxesModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MODULES = [
@@ -86,10 +89,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'decide.urls'
 
+AUTH_TEMPLATE_PATH = os.path.join(BASE_DIR, 'authentication')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+		    AUTH_TEMPLATE_PATH ,
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,7 +109,21 @@ TEMPLATES = [
         },
     },
 ]
+# new lock out fail attends
+CACHES = {
+'default': {
+'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+},
+'axes_cache': {
+'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+}
+}
 
+AXES_CACHE = 'axes_cache'
+AXES_CACHE_LIMIT = 4
+AXES_COOLOFF_TIME = 0.005
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 WSGI_APPLICATION = 'decide.wsgi.application'
 
 
@@ -167,6 +189,7 @@ INSTALLED_APPS = INSTALLED_APPS + MODULES
 
 APIS = {}
 
+
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
     'localhost:8000'
@@ -174,3 +197,18 @@ CORS_ORIGIN_WHITELIST = (
 
 import django_heroku
 django_heroku.settings(locals())
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+from decide.leerFichero import ficheroCorreoContrasena
+
+auth_email_data = ficheroCorreoContrasena()
+
+
+# email configuration
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = auth_email_data[0][0]
+EMAIL_HOST_PASSWORD = auth_email_data[1][0]
