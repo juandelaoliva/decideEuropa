@@ -141,7 +141,7 @@ class StoreTextCase(BaseTestCase):
         votes = response.json()
 
         self.assertEqual(len(votes), Vote.objects.filter(voter_id=v).count())
-'''
+
     def test_hasvote(self):
         votings, voters = self.gen_votes()
         vo = Vote.objects.first()
@@ -163,7 +163,7 @@ class StoreTextCase(BaseTestCase):
         self.assertEqual(len(votes), 1)
         self.assertEqual(votes[0]["voting_id"], v)
         self.assertEqual(votes[0]["voter_id"], u)
-'''
+
     def test_voting_status(self):
         data = {
             "voting": 5001,
