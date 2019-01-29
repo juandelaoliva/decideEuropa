@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'corsheaders',
     'django_filters',
     'rest_framework',
@@ -88,6 +87,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'decide.urls'
+
+AUTH_TEMPLATE_PATH = os.path.join(BASE_DIR, 'authentication')
 
 TEMPLATES = [
     {
@@ -190,7 +191,6 @@ APIS = {}
 import django_heroku
 django_heroku.settings(locals())
 
-INSTALLED_APPS = INSTALLED_APPS + MODULES
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
